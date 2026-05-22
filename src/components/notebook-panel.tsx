@@ -61,6 +61,7 @@ export function NotebookPanel() {
   }, []);
 
   const handleNew = () => {
+    if (panelCollapsed) togglePanel();
     createNote();
   };
 
