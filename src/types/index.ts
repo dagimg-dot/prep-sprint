@@ -28,6 +28,13 @@ export interface TestEntry {
   audioFileName?: string;
 }
 
+export interface NoteEntry {
+  id: string;
+  title: string;
+  body: string;
+  updatedAt: string;
+}
+
 export interface AppState {
   targetDate: string | null;
   entries: TestEntry[];

@@ -7,7 +7,11 @@ function Layout({ children }: { children: React.ReactNode }) {
     <div className="min-h-screen bg-background text-foreground">
       <header className="sticky top-0 z-10 border-b bg-background/80 backdrop-blur">
         <div className="mx-auto flex max-w-2xl items-center justify-between px-4 py-3">
-          <NavLink to="/" className="text-lg font-bold tracking-tight">
+          <NavLink
+            to="/"
+            className="flex items-center gap-2 text-lg font-bold tracking-tight"
+          >
+            <img src="/favicon.svg" alt="" className="h-6 w-6" />
             PrepSprint
           </NavLink>
           <nav className="flex gap-4 text-sm">
@@ -35,7 +39,7 @@ function Layout({ children }: { children: React.ReactNode }) {
           </nav>
         </div>
       </header>
-      <main className="mx-auto max-w-2xl px-4 py-6">{children}</main>
+      <main className="mx-auto max-w-6xl px-4 py-6">{children}</main>
     </div>
   );
 }
