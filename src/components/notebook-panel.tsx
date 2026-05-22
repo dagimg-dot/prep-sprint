@@ -70,31 +70,41 @@ export function NotebookPanel() {
   };
 
   const cardRef = useRef<HTMLDivElement>(null);
-  const [maxH, setMaxH] = useState<number | null>(null);
+  const headerRef = useRef<HTMLDivElement>(null);
+  const textareaRef = useRef<HTMLTextAreaElement>(null);
+  const [contentMaxH, setContentMaxH] = useState<number | null>(null);
 
   useEffect(() => {
     const update = () => {
-      if (!cardRef.current) return;
-      const rect = cardRef.current.getBoundingClientRect();
-      const available = window.innerHeight - rect.top - 64;
-      setMaxH(Math.max(150, available));
+      if (!cardRef.current || !headerRef.current) return;
+      const cardTop = cardRef.current.getBoundingClientRect().top;
+      const headerH = headerRef.current.offsetHeight;
+      const available = window.innerHeight - cardTop - headerH - 64;
+      setContentMaxH(Math.max(100, available));
     };
     update();
     window.addEventListener("resize", update);
     return () => window.removeEventListener("resize", update);
   }, []);
 
+  // biome-ignore lint/correctness/useExhaustiveDependencies: need to re-run on body change to auto-grow textarea
+  useEffect(() => {
+    const ta = textareaRef.current;
+    if (!ta) return;
+    ta.style.height = "auto";
+    ta.style.height = `${ta.scrollHeight}px`;
+  }, [body]);
+
   const noteList = [...notes].sort(
     (a, b) => new Date(b.updatedAt).getTime() - new Date(a.updatedAt).getTime(),
   );
 
   return (
-    <Card
-      ref={cardRef}
-      className="flex flex-col overflow-hidden rounded-md"
-      style={maxH !== null ? { maxHeight: maxH } : undefined}
-    >
-      <CardHeader className="flex-row items-center justify-between space-y-0 py-2 shrink-0">
+    <Card ref={cardRef} className="flex flex-col rounded-md">
+      <CardHeader
+        ref={headerRef}
+        className="flex-row items-center justify-between space-y-0 py-2 shrink-0"
+      >
         <CardTitle className="text-base">Notebook</CardTitle>
         <div className="flex items-center gap-1">
           <Button variant="outline" size="sm" onClick={handleNew}>
@@ -111,136 +121,143 @@ export function NotebookPanel() {
         </div>
       </CardHeader>
       <div
-        className={`overflow-hidden transition-all duration-300 ease-in-out ${
-          panelCollapsed ? "max-h-0 opacity-0" : "max-h-[2000px] opacity-100"
+        className={`transition-all duration-300 ease-in-out ${
+          panelCollapsed ? "max-h-0 opacity-0" : "opacity-100"
         }`}
+        style={panelCollapsed ? { overflow: "hidden" } : undefined}
       >
-        <CardContent className="flex flex-col gap-3 overflow-y-auto pt-0">
-          {noteList.length > 0 && (
-            <div className="flex gap-1 flex-wrap">
-              {noteList.map((n) => (
-                <button
-                  key={n.id}
-                  type="button"
-                  onClick={() => setActiveNote(n.id)}
-                  className={`text-xs px-2 py-1 rounded-md border transition-colors ${
-                    n.id === activeNoteId
-                      ? "border-primary bg-primary/10 text-foreground"
-                      : "border-border text-muted-foreground hover:text-foreground"
-                  }`}
-                >
-                  {n.title}
-                </button>
-              ))}
-            </div>
-          )}
-          {activeNote ? (
-            <>
-              <div className="flex items-center gap-2">
-                {readMode ? (
-                  <span className="flex-1 text-sm font-medium px-1">
-                    {title}
-                  </span>
-                ) : (
-                  <input
-                    type="text"
-                    value={title}
-                    onChange={(e) => handleTitleChange(e.target.value)}
-                    placeholder="Note title"
-                    className="flex-1 bg-transparent border-b border-border px-1 py-0.5 text-sm font-medium outline-none focus:border-primary"
-                  />
-                )}
-                <button
-                  type="button"
-                  onClick={() => setReadMode(!readMode)}
-                  className="text-xs text-muted-foreground hover:text-foreground underline underline-offset-2 shrink-0"
-                >
-                  {readMode ? "Edit" : "Read"}
-                </button>
-                <Button
-                  variant="ghost"
-                  size="sm"
-                  className="text-muted-foreground hover:text-destructive shrink-0"
-                  onClick={handleDelete}
-                >
-                  Delete
-                </Button>
+        <div
+          className="overflow-y-auto scrollbar-none"
+          style={contentMaxH !== null ? { maxHeight: contentMaxH } : undefined}
+        >
+          <CardContent className="flex flex-col gap-3 pt-0">
+            {noteList.length > 0 && (
+              <div className="flex gap-1 flex-wrap">
+                {noteList.map((n) => (
+                  <button
+                    key={n.id}
+                    type="button"
+                    onClick={() => setActiveNote(n.id)}
+                    className={`text-xs px-2 py-1 rounded-md border transition-colors ${
+                      n.id === activeNoteId
+                        ? "border-primary bg-primary/10 text-foreground"
+                        : "border-border text-muted-foreground hover:text-foreground"
+                    }`}
+                  >
+                    {n.title}
+                  </button>
+                ))}
               </div>
-
-              {readMode ? (
-                <div className="prose prose-sm prose-invert max-w-none flex-1 overflow-auto rounded-md border bg-background p-4">
-                  <Markdown remarkPlugins={[remarkGfm]}>
-                    {body || "*Empty*"}
-                  </Markdown>
-                </div>
-              ) : (
-                <>
-                  <textarea
-                    value={body}
-                    onChange={(e) => handleBodyChange(e.target.value)}
-                    onKeyDown={(e) => {
-                      if (e.key === "Tab") {
-                        e.preventDefault();
-                        const ta = e.currentTarget;
-                        const start = ta.selectionStart;
-                        const end = ta.selectionEnd;
-                        const next =
-                          body.slice(0, start) + "  " + body.slice(end);
-                        setBody(next);
-                        requestAnimationFrame(() => {
-                          ta.selectionStart = ta.selectionEnd = start + 2;
-                        });
-                        clearTimeout(debounceRef.current);
-                        debounceRef.current = setTimeout(
-                          () => save(title, next),
-                          300,
-                        );
-                      }
-                    }}
-                    placeholder="Write in markdown..."
-                    className="flex-1 w-full resize-none rounded-md border border-input bg-background p-3 text-sm outline-none focus:border-primary min-h-[200px]"
-                  />
-
-                  <div className="flex items-center gap-2">
-                    <button
-                      type="button"
-                      onClick={() => setPreview(!preview)}
-                      className="text-xs text-muted-foreground hover:text-foreground underline underline-offset-2"
-                    >
-                      {preview ? "Hide preview" : "Show preview"}
-                    </button>
-                    {!preview && (
-                      <span className="text-[10px] text-muted-foreground">
-                        (auto-saves)
-                      </span>
-                    )}
-                  </div>
-
-                  {preview && (
-                    <div className="prose prose-sm prose-invert max-w-none rounded-md border bg-background p-3 overflow-auto max-h-80">
-                      <Markdown remarkPlugins={[remarkGfm]}>
-                        {body || "*Empty*"}
-                      </Markdown>
-                    </div>
+            )}
+            {activeNote ? (
+              <>
+                <div className="flex items-center gap-2">
+                  {readMode ? (
+                    <span className="flex-1 text-sm font-medium px-1">
+                      {title}
+                    </span>
+                  ) : (
+                    <input
+                      type="text"
+                      value={title}
+                      onChange={(e) => handleTitleChange(e.target.value)}
+                      placeholder="Note title"
+                      className="flex-1 bg-transparent border-b border-border px-1 py-0.5 text-sm font-medium outline-none focus:border-primary"
+                    />
                   )}
-                </>
-              )}
-            </>
-          ) : (
-            <div className="flex-1 flex items-center justify-center">
-              <p className="text-sm text-muted-foreground">
-                No notes yet.{" "}
-                <button
-                  type="button"
-                  onClick={handleNew}
-                  className="underline underline-offset-2 hover:text-foreground"
-                >
-                  Create one
-                </button>
-              </p>
-            </div>
-          )}
-        </CardContent>
+                  <button
+                    type="button"
+                    onClick={() => setReadMode(!readMode)}
+                    className="text-xs text-muted-foreground hover:text-foreground underline underline-offset-2 shrink-0"
+                  >
+                    {readMode ? "Edit" : "Read"}
+                  </button>
+                  <Button
+                    variant="ghost"
+                    size="sm"
+                    className="text-muted-foreground hover:text-destructive shrink-0"
+                    onClick={handleDelete}
+                  >
+                    Delete
+                  </Button>
+                </div>
+
+                {readMode ? (
+                  <div className="prose prose-sm prose-invert max-w-none flex-1 overflow-auto rounded-md border bg-background p-4">
+                    <Markdown remarkPlugins={[remarkGfm]}>
+                      {body || "*Empty*"}
+                    </Markdown>
+                  </div>
+                ) : (
+                  <>
+                    <textarea
+                      ref={textareaRef}
+                      value={body}
+                      onChange={(e) => handleBodyChange(e.target.value)}
+                      onKeyDown={(e) => {
+                        if (e.key === "Tab") {
+                          e.preventDefault();
+                          const ta = e.currentTarget;
+                          const start = ta.selectionStart;
+                          const end = ta.selectionEnd;
+                          const next =
+                            body.slice(0, start) + "  " + body.slice(end);
+                          setBody(next);
+                          requestAnimationFrame(() => {
+                            ta.selectionStart = ta.selectionEnd = start + 2;
+                          });
+                          clearTimeout(debounceRef.current);
+                          debounceRef.current = setTimeout(
+                            () => save(title, next),
+                            300,
+                          );
+                        }
+                      }}
+                      placeholder="Write in markdown..."
+                      className="w-full resize-none scrollbar-none rounded-md border border-input bg-background p-3 text-sm outline-none focus:border-primary min-h-[120px]"
+                    />
+
+                    <div className="flex items-center gap-2">
+                      <button
+                        type="button"
+                        onClick={() => setPreview(!preview)}
+                        className="text-xs text-muted-foreground hover:text-foreground underline underline-offset-2"
+                      >
+                        {preview ? "Hide preview" : "Show preview"}
+                      </button>
+                      {!preview && (
+                        <span className="text-[10px] text-muted-foreground">
+                          (auto-saves)
+                        </span>
+                      )}
+                    </div>
+
+                    {preview && (
+                      <div className="prose prose-sm prose-invert max-w-none rounded-md border bg-background p-3 overflow-auto max-h-80">
+                        <Markdown remarkPlugins={[remarkGfm]}>
+                          {body || "*Empty*"}
+                        </Markdown>
+                      </div>
+                    )}
+                  </>
+                )}
+              </>
+            ) : (
+              <div className="flex-1 flex items-center justify-center">
+                <p className="text-sm text-muted-foreground">
+                  No notes yet.{" "}
+                  <button
+                    type="button"
+                    onClick={handleNew}
+                    className="underline underline-offset-2 hover:text-foreground"
+                  >
+                    Create one
+                  </button>
+                </p>
+              </div>
+            )}
+          </CardContent>
+        </div>
       </div>
     </Card>
   );
