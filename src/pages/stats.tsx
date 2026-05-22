@@ -1,13 +1,5 @@
-import {
-  addDays,
-  differenceInDays,
-  format,
-  isSameDay,
-  parseISO,
-  startOfMonth,
-  startOfWeek,
-  subMonths,
-} from "date-fns";
+import { parseISO } from "date-fns";
+import { StreakCalendar } from "@/components/streak-calendar";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { useStore } from "@/store/use-store";
 import { TEST_TYPE_LABELS, type TestType } from "@/types";
@@ -152,62 +144,5 @@ function ScoreTrendChart({
         );
       })}
     </svg>
-  );
-}
-
-function StreakCalendar({ entries }: { entries: { date: string }[] }) {
-  const today = new Date();
-  const startDate = subMonths(startOfMonth(today), 2);
-  const entryDates = new Set(entries.map((e) => e.date));
-
-  const weeks: Date[][] = [];
-  let currentWeek: Date[] = [];
-  const weekStart = startOfWeek(startDate, { weekStartsOn: 1 });
-
-  for (let i = 0; i < differenceInDays(today, weekStart) + 1; i++) {
-    const day = addDays(weekStart, i);
-    currentWeek.push(day);
-    if (currentWeek.length === 7) {
-      weeks.push(currentWeek);
-      currentWeek = [];
-    }
-  }
-  if (currentWeek.length > 0) weeks.push(currentWeek);
-
-  return (
-    <div className="space-y-1">
-      <div className="flex gap-0.5">
-        {["M", "T", "W", "T", "F", "S", "S"].map((d) => (
-          <div
-            key={d}
-            className="w-4 text-[10px] text-muted-foreground text-center"
-          >
-            {d}
-          </div>
-        ))}
-      </div>
-      {weeks.map((week) => (
-        <div key={format(week[0], "yyyy-MM-dd")} className="flex gap-0.5">
-          {week.map((day) => {
-            const key = format(day, "yyyy-MM-dd");
-            const hasEntry = entryDates.has(key);
-            const isToday = isSameDay(day, today);
-            return (
-              <div
-                key={key}
-                className={`w-4 h-4 rounded-sm ${
-                  hasEntry
-                    ? "bg-emerald-500"
-                    : isToday
-                      ? "border border-dashed border-muted-foreground"
-                      : "bg-muted"
-                }`}
-                title={`${format(day, "MMM d")}${hasEntry ? " — active" : ""}`}
-              />
-            );
-          })}
-        </div>
-      ))}
-    </div>
   );
 }
