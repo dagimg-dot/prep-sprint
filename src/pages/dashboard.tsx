@@ -13,7 +13,7 @@ export function Dashboard() {
   const removeEntry = useStore((s) => s.removeEntry);
 
   return (
-    <div className="flex min-h-0 flex-1 flex-col gap-6">
+    <div className="space-y-6">
       <ExamDateBanner />
 
       <div className="flex gap-6">
@@ -34,8 +34,8 @@ export function Dashboard() {
         <StatsHeader />
       </div>
 
-      <div className="grid min-h-0 flex-1 grid-cols-1 lg:grid-cols-[4fr_6fr] gap-6">
-        <div className="space-y-6 overflow-y-auto">
+      <div className="grid grid-cols-1 lg:grid-cols-[4fr_6fr] gap-6">
+        <div className="space-y-6">
           <AddEntryForm />
 
           {entries.length > 0 && (
@@ -57,7 +57,7 @@ export function Dashboard() {
           )}
         </div>
 
-        <div className="h-full lg:sticky lg:top-20">
+        <div className="lg:sticky lg:top-20 lg:self-start">
           <NotebookPanel />
         </div>
       </div>
