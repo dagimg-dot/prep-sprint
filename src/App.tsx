@@ -44,6 +44,19 @@ function Layout({ children }: { children: React.ReactNode }) {
         </div>
       </header>
       <main className="mx-auto max-w-7xl px-8 py-6">{children}</main>
+      <footer className="border-t">
+        <div className="mx-auto max-w-7xl px-8 py-4 text-center text-xs text-muted-foreground">
+          Made with 🧡 by{" "}
+          <a
+            href="https://github.com/dagimg-dot"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="underline underline-offset-2 hover:text-foreground"
+          >
+            dagimg-dot
+          </a>
+        </div>
+      </footer>
     </div>
   );
 }
