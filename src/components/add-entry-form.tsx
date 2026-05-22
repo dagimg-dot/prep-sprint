@@ -1,34 +1,39 @@
-import { useState } from 'react'
-import { Button } from '@/components/ui/button'
-import { Input } from '@/components/ui/input'
-import { Textarea } from '@/components/ui/textarea'
+import { format } from "date-fns";
+import { useState } from "react";
+import { TypeSpecificFields } from "@/components/type-specific-fields";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Input } from "@/components/ui/input";
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from '@/components/ui/select'
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
-import { useStore } from '@/store/use-store'
-import { format } from 'date-fns'
-import { TEST_TYPES, TEST_TYPE_LABELS, type TestType, type TestEntry } from '@/types'
-import { TypeSpecificFields } from '@/components/type-specific-fields'
+} from "@/components/ui/select";
+import { Textarea } from "@/components/ui/textarea";
+import { useStore } from "@/store/use-store";
+import {
+  TEST_TYPE_LABELS,
+  TEST_TYPES,
+  type TestEntry,
+  type TestType,
+} from "@/types";
 
 export function AddEntryForm() {
-  const addEntry = useStore((s) => s.addEntry)
-  const [testName, setTestName] = useState('')
-  const [testType, setTestType] = useState<TestType>('listening')
-  const [score, setScore] = useState('')
-  const [testLink, setTestLink] = useState('')
-  const [writingTask1, setWritingTask1] = useState('')
-  const [writingTask2, setWritingTask2] = useState('')
-  const [audioFileName, setAudioFileName] = useState('')
-  const [notes, setNotes] = useState('')
-  const [expanded, setExpanded] = useState(false)
+  const addEntry = useStore((s) => s.addEntry);
+  const [testName, setTestName] = useState("");
+  const [testType, setTestType] = useState<TestType>("listening");
+  const [score, setScore] = useState("");
+  const [testLink, setTestLink] = useState("");
+  const [writingTask1, setWritingTask1] = useState("");
+  const [writingTask2, setWritingTask2] = useState("");
+  const [audioFileName, setAudioFileName] = useState("");
+  const [notes, setNotes] = useState("");
+  const [expanded, setExpanded] = useState(false);
 
   const handleSubmit = () => {
-    if (!testName.trim() || !score.trim()) return
+    if (!testName.trim() || !score.trim()) return;
 
     const entry: TestEntry = {
       id: crypto.randomUUID(),
@@ -36,38 +41,38 @@ export function AddEntryForm() {
       testType,
       score: parseFloat(score),
       notes: notes.trim(),
-      date: format(new Date(), 'yyyy-MM-dd'),
+      date: format(new Date(), "yyyy-MM-dd"),
       testLink: undefined,
       writingTask1: undefined,
       writingTask2: undefined,
       audioFileName: undefined,
+    };
+
+    if (testType === "listening" || testType === "reading") {
+      entry.testLink = testLink.trim() || undefined;
+    }
+    if (testType === "writing") {
+      entry.writingTask1 = writingTask1.trim() || undefined;
+      entry.writingTask2 = writingTask2.trim() || undefined;
+      entry.testLink = testLink.trim() || undefined;
+    }
+    if (testType === "speaking") {
+      entry.audioFileName = audioFileName || undefined;
+      entry.testLink = testLink.trim() || undefined;
     }
 
-    if (testType === 'listening' || testType === 'reading') {
-      entry.testLink = testLink.trim() || undefined
-    }
-    if (testType === 'writing') {
-      entry.writingTask1 = writingTask1.trim() || undefined
-      entry.writingTask2 = writingTask2.trim() || undefined
-      entry.testLink = testLink.trim() || undefined
-    }
-    if (testType === 'speaking') {
-      entry.audioFileName = audioFileName || undefined
-      entry.testLink = testLink.trim() || undefined
-    }
+    addEntry(entry);
 
-    addEntry(entry)
-
-    setTestName('')
-    setTestType('listening')
-    setScore('')
-    setTestLink('')
-    setWritingTask1('')
-    setWritingTask2('')
-    setAudioFileName('')
-    setNotes('')
-    setExpanded(false)
-  }
+    setTestName("");
+    setTestType("listening");
+    setScore("");
+    setTestLink("");
+    setWritingTask1("");
+    setWritingTask2("");
+    setAudioFileName("");
+    setNotes("");
+    setExpanded(false);
+  };
 
   if (!expanded) {
     return (
@@ -78,10 +83,11 @@ export function AddEntryForm() {
       >
         + Add test result
       </Button>
-    )
+    );
   }
 
-  const isValid = testName.trim() && score.trim() && !isNaN(parseFloat(score))
+  const isValid =
+    testName.trim() && score.trim() && !Number.isNaN(parseFloat(score));
 
   return (
     <Card>
@@ -147,5 +153,5 @@ export function AddEntryForm() {
         </div>
       </CardContent>
     </Card>
-  )
+  );
 }

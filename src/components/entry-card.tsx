@@ -1,26 +1,32 @@
-import type { TestEntry } from '@/types'
-import { Card, CardContent } from '@/components/ui/card'
-import { Badge } from '@/components/ui/badge'
-import { Button } from '@/components/ui/button'
-import { Separator } from '@/components/ui/separator'
-import { format, parseISO } from 'date-fns'
-import { TEST_TYPE_LABELS } from '@/types'
-import { useState } from 'react'
+import { format, parseISO } from "date-fns";
+import { useState } from "react";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent } from "@/components/ui/card";
+import { Separator } from "@/components/ui/separator";
+import type { TestEntry } from "@/types";
+import { TEST_TYPE_LABELS } from "@/types";
 
 interface EntryCardProps {
-  entry: TestEntry
-  onDelete: (id: string) => void
+  entry: TestEntry;
+  onDelete: (id: string) => void;
 }
 
 const typeColors: Record<string, string> = {
-  listening: 'bg-sky-500/15 text-sky-400 border-sky-500/30',
-  reading: 'bg-violet-500/15 text-violet-400 border-violet-500/30',
-  writing: 'bg-amber-500/15 text-amber-400 border-amber-500/30',
-  speaking: 'bg-rose-500/15 text-rose-400 border-rose-500/30',
-}
+  listening: "bg-sky-500/15 text-sky-400 border-sky-500/30",
+  reading: "bg-violet-500/15 text-violet-400 border-violet-500/30",
+  writing: "bg-amber-500/15 text-amber-400 border-amber-500/30",
+  speaking: "bg-rose-500/15 text-rose-400 border-rose-500/30",
+};
 
-function CollapsibleSection({ title, children }: { title: string; children: React.ReactNode }) {
-  const [open, setOpen] = useState(false)
+function CollapsibleSection({
+  title,
+  children,
+}: {
+  title: string;
+  children: React.ReactNode;
+}) {
+  const [open, setOpen] = useState(false);
   return (
     <div className="space-y-1">
       <button
@@ -28,17 +34,21 @@ function CollapsibleSection({ title, children }: { title: string; children: Reac
         onClick={() => setOpen(!open)}
         className="text-xs text-muted-foreground hover:text-foreground underline underline-offset-2"
       >
-        {open ? 'Hide' : 'Show'} {title}
+        {open ? "Hide" : "Show"} {title}
       </button>
-      {open && <div className="text-sm text-muted-foreground whitespace-pre-wrap rounded-md bg-background p-2 border">{children}</div>}
+      {open && (
+        <div className="text-sm text-muted-foreground whitespace-pre-wrap rounded-md bg-background p-2 border">
+          {children}
+        </div>
+      )}
     </div>
-  )
+  );
 }
 
 export function EntryCard({ entry, onDelete }: EntryCardProps) {
-  const dateLabel = format(parseISO(entry.date), 'MMM d')
-  const isWriting = entry.testType === 'writing'
-  const isSpeaking = entry.testType === 'speaking'
+  const dateLabel = format(parseISO(entry.date), "MMM d");
+  const isWriting = entry.testType === "writing";
+  const isSpeaking = entry.testType === "speaking";
 
   return (
     <Card className="group">
@@ -52,7 +62,7 @@ export function EntryCard({ entry, onDelete }: EntryCardProps) {
             <div className="flex items-center gap-2">
               <Badge
                 variant="outline"
-                className={`text-xs font-normal ${typeColors[entry.testType] ?? ''}`}
+                className={`text-xs font-normal ${typeColors[entry.testType] ?? ""}`}
               >
                 {TEST_TYPE_LABELS[entry.testType]}
               </Badge>
@@ -142,5 +152,5 @@ export function EntryCard({ entry, onDelete }: EntryCardProps) {
         </div>
       </CardContent>
     </Card>
-  )
+  );
 }

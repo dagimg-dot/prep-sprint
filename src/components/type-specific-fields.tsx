@@ -1,29 +1,29 @@
-import { Input } from '@/components/ui/input'
-import { Textarea } from '@/components/ui/textarea'
-import { Button } from '@/components/ui/button'
-import type { TestType } from '@/types'
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
+import type { TestType } from "@/types";
 
 interface TypeSpecificFieldsProps {
-  testType: TestType
-  testLink: string
-  writingTask1: string
-  writingTask2: string
-  audioFileName: string
-  onTestLinkChange: (v: string) => void
-  onWritingTask1Change: (v: string) => void
-  onWritingTask2Change: (v: string) => void
-  onAudioFileChange: (name: string) => void
+  testType: TestType;
+  testLink: string;
+  writingTask1: string;
+  writingTask2: string;
+  audioFileName: string;
+  onTestLinkChange: (v: string) => void;
+  onWritingTask1Change: (v: string) => void;
+  onWritingTask2Change: (v: string) => void;
+  onAudioFileChange: (name: string) => void;
 }
 
 export function TypeSpecificFields(props: TypeSpecificFieldsProps) {
   switch (props.testType) {
-    case 'listening':
-    case 'reading':
-      return <LinkFields {...props} />
-    case 'writing':
-      return <WritingFields {...props} />
-    case 'speaking':
-      return <SpeakingFields {...props} />
+    case "listening":
+    case "reading":
+      return <LinkFields {...props} />;
+    case "writing":
+      return <WritingFields {...props} />;
+    case "speaking":
+      return <SpeakingFields {...props} />;
   }
 }
 
@@ -35,7 +35,7 @@ function LinkFields({ testLink, onTestLinkChange }: TypeSpecificFieldsProps) {
       value={testLink}
       onChange={(e) => onTestLinkChange(e.target.value)}
     />
-  )
+  );
 }
 
 function WritingFields({
@@ -50,7 +50,8 @@ function WritingFields({
     <div className="space-y-3">
       <div className="space-y-1.5">
         <p className="text-sm font-medium text-muted-foreground">
-          Task 1 <span className="text-xs">(150+ words — describe the visual)</span>
+          Task 1{" "}
+          <span className="text-xs">(150+ words — describe the visual)</span>
         </p>
         <Textarea
           placeholder="Paste or type your Task 1 response..."
@@ -77,7 +78,7 @@ function WritingFields({
         onChange={(e) => onTestLinkChange(e.target.value)}
       />
     </div>
-  )
+  );
 }
 
 function SpeakingFields({
@@ -87,10 +88,10 @@ function SpeakingFields({
   onTestLinkChange,
 }: TypeSpecificFieldsProps) {
   const handleClick = () => {
-    const fakeName = `speaking-recording-${Date.now()}.webm`
-    onAudioFileChange(fakeName)
-    console.log('[upload stub]', fakeName)
-  }
+    const fakeName = `speaking-recording-${Date.now()}.webm`;
+    onAudioFileChange(fakeName);
+    console.log("[upload stub]", fakeName);
+  };
 
   return (
     <div className="space-y-3">
@@ -107,16 +108,10 @@ function SpeakingFields({
           className="w-full"
           onClick={handleClick}
         >
-          {audioFileName ? (
-            <>Replace recording...</>
-          ) : (
-            <>Upload recording...</>
-          )}
+          {audioFileName ? <>Replace recording...</> : <>Upload recording...</>}
         </Button>
         {audioFileName && (
-          <p className="text-xs text-emerald-400">
-            Uploaded: {audioFileName}
-          </p>
+          <p className="text-xs text-emerald-400">Uploaded: {audioFileName}</p>
         )}
       </div>
       <Input
@@ -126,5 +121,5 @@ function SpeakingFields({
         onChange={(e) => onTestLinkChange(e.target.value)}
       />
     </div>
-  )
+  );
 }

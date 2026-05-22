@@ -1,29 +1,34 @@
-import { useStore } from '@/store/use-store'
-import { differenceInDays, differenceInHours, format, parseISO } from 'date-fns'
-import { Button } from '@/components/ui/button'
-import { Input } from '@/components/ui/input'
-import { useState } from 'react'
+import {
+  differenceInDays,
+  differenceInHours,
+  format,
+  parseISO,
+} from "date-fns";
+import { useState } from "react";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { useStore } from "@/store/use-store";
 
 export function ExamDateBanner() {
-  const targetDate = useStore((s) => s.targetDate)
-  const setTargetDate = useStore((s) => s.setTargetDate)
-  const [editing, setEditing] = useState(false)
-  const [input, setInput] = useState(targetDate ?? '')
+  const targetDate = useStore((s) => s.targetDate);
+  const setTargetDate = useStore((s) => s.setTargetDate);
+  const [editing, setEditing] = useState(false);
+  const [input, setInput] = useState(targetDate ?? "");
 
   const handleSave = () => {
     if (input) {
-      setTargetDate(input)
+      setTargetDate(input);
     } else {
-      setTargetDate(null)
+      setTargetDate(null);
     }
-    setEditing(false)
-  }
+    setEditing(false);
+  };
 
   const handleClear = () => {
-    setTargetDate(null)
-    setInput('')
-    setEditing(false)
-  }
+    setTargetDate(null);
+    setInput("");
+    setEditing(false);
+  };
 
   if (!targetDate && !editing) {
     return (
@@ -33,12 +38,18 @@ export function ExamDateBanner() {
           Set exam date
         </Button>
       </div>
-    )
+    );
   }
 
-  const diffDays = targetDate ? differenceInDays(parseISO(targetDate), new Date()) : 0
-  const diffHours = targetDate ? differenceInHours(parseISO(targetDate), new Date()) % 24 : 0
-  const formatted = targetDate ? format(parseISO(targetDate), 'MMM d, yyyy') : ''
+  const diffDays = targetDate
+    ? differenceInDays(parseISO(targetDate), new Date())
+    : 0;
+  const diffHours = targetDate
+    ? differenceInHours(parseISO(targetDate), new Date()) % 24
+    : 0;
+  const formatted = targetDate
+    ? format(parseISO(targetDate), "MMM d, yyyy")
+    : "";
 
   return (
     <div className="rounded-xl border bg-card p-4 shadow">
@@ -65,8 +76,8 @@ export function ExamDateBanner() {
               <button
                 type="button"
                 onClick={() => {
-                  setInput(targetDate!)
-                  setEditing(true)
+                  if (targetDate) setInput(targetDate);
+                  setEditing(true);
                 }}
                 className="ml-2 text-sm underline underline-offset-2 hover:text-foreground"
               >
@@ -78,7 +89,9 @@ export function ExamDateBanner() {
                 {diffDays}d {diffHours}h until exam
               </p>
             ) : diffDays === 0 ? (
-              <p className="text-3xl font-bold tracking-tight text-destructive">Exam day!</p>
+              <p className="text-3xl font-bold tracking-tight text-destructive">
+                Exam day!
+              </p>
             ) : (
               <p className="text-lg font-bold text-muted-foreground">
                 Exam was {Math.abs(diffDays)}d ago
@@ -88,5 +101,5 @@ export function ExamDateBanner() {
         </div>
       )}
     </div>
-  )
+  );
 }

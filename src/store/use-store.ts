@@ -1,6 +1,6 @@
-import { create } from 'zustand'
-import { persist } from 'zustand/middleware'
-import type { AppState } from '@/types'
+import { create } from "zustand";
+import { persist } from "zustand/middleware";
+import type { AppState } from "@/types";
 
 export const useStore = create<AppState>()(
   persist(
@@ -21,7 +21,7 @@ export const useStore = create<AppState>()(
         })),
     }),
     {
-      name: 'prepsprint-storage',
+      name: "prepsprint-storage",
     },
   ),
-)
+);

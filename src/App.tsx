@@ -1,6 +1,6 @@
-import { Routes, Route, NavLink } from 'react-router-dom'
-import { Dashboard } from '@/pages/dashboard'
-import { Stats } from '@/pages/stats'
+import { NavLink, Route, Routes } from "react-router-dom";
+import { Dashboard } from "@/pages/dashboard";
+import { Stats } from "@/pages/stats";
 
 function Layout({ children }: { children: React.ReactNode }) {
   return (
@@ -15,7 +15,9 @@ function Layout({ children }: { children: React.ReactNode }) {
               to="/"
               end
               className={({ isActive }) =>
-                isActive ? 'font-medium text-foreground' : 'text-muted-foreground hover:text-foreground'
+                isActive
+                  ? "font-medium text-foreground"
+                  : "text-muted-foreground hover:text-foreground"
               }
             >
               Dashboard
@@ -23,7 +25,9 @@ function Layout({ children }: { children: React.ReactNode }) {
             <NavLink
               to="/stats"
               className={({ isActive }) =>
-                isActive ? 'font-medium text-foreground' : 'text-muted-foreground hover:text-foreground'
+                isActive
+                  ? "font-medium text-foreground"
+                  : "text-muted-foreground hover:text-foreground"
               }
             >
               Stats
@@ -33,7 +37,7 @@ function Layout({ children }: { children: React.ReactNode }) {
       </header>
       <main className="mx-auto max-w-2xl px-4 py-6">{children}</main>
     </div>
-  )
+  );
 }
 
 export default function App() {
@@ -44,5 +48,5 @@ export default function App() {
         <Route path="/stats" element={<Stats />} />
       </Routes>
     </Layout>
-  )
+  );
 }
