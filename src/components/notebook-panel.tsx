@@ -73,8 +73,8 @@ export function NotebookPanel() {
   );
 
   return (
-    <Card className="flex flex-col">
-      <CardHeader className="pb-3 flex-row items-center justify-between space-y-0">
+    <Card className="flex flex-col rounded-md">
+      <CardHeader className="flex-row items-center justify-between space-y-0 py-2">
         <CardTitle className="text-base">Notebook</CardTitle>
         <div className="flex items-center gap-1">
           <Button variant="outline" size="sm" onClick={handleNew}>

@@ -19,7 +19,7 @@ export function Dashboard() {
         <StatsHeader />
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+      <div className="grid grid-cols-1 lg:grid-cols-[4fr_6fr] gap-6">
         <div className="space-y-6">
           <AddEntryForm />
 
