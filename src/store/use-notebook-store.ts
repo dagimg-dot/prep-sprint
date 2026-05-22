@@ -5,10 +5,12 @@ import type { NoteEntry } from "@/types";
 interface NotebookState {
   notes: NoteEntry[];
   activeNoteId: string | null;
+  panelCollapsed: boolean;
   setActiveNote: (id: string | null) => void;
   upsertNote: (id: string, title: string, body: string) => void;
   deleteNote: (id: string) => void;
   createNote: () => string;
+  togglePanel: () => void;
 }
 
 export const useNotebookStore = create<NotebookState>()(
@@ -16,6 +18,7 @@ export const useNotebookStore = create<NotebookState>()(
     (set) => ({
       notes: [],
       activeNoteId: null,
+      panelCollapsed: false,
 
       setActiveNote: (id) => set({ activeNoteId: id }),
 
@@ -62,6 +65,8 @@ export const useNotebookStore = create<NotebookState>()(
         }));
         return id;
       },
+
+      togglePanel: () => set((s) => ({ panelCollapsed: !s.panelCollapsed })),
     }),
     {
       name: "prepsprint-notebook",
