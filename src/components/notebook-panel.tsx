@@ -114,7 +114,6 @@ export function NotebookPanel() {
               ))}
             </div>
           )}
-
           {activeNote ? (
             <>
               <div className="flex items-center gap-2">
