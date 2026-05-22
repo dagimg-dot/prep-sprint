@@ -98,7 +98,7 @@ export function StreakCalendar({
         {Array.from({ length: 7 }, (_, dayIdx) => (
           // biome-ignore lint/suspicious/noArrayIndexKey: fixed 7-day array, stable order
           <div key={dayIdx} className="flex gap-[3px] items-center">
-            <div className="w-6 text-right text-[10px] text-muted-foreground leading-none pr-1 shrink-0">
+            <div className="w-4 text-left text-[10px] text-muted-foreground leading-none shrink-0">
               {dayLabels[dayIdx]}
             </div>
             {weeks.map((week) => {

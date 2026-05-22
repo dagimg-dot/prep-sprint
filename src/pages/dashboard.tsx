@@ -6,7 +6,7 @@ import { NotebookPanel } from "@/components/notebook-panel";
 import { StatsHeader } from "@/components/stats-header";
 import { StreakBadge } from "@/components/streak-badge";
 import { StreakCalendar } from "@/components/streak-calendar";
-import { Card, CardTitle } from "@/components/ui/card";
+import { Card } from "@/components/ui/card";
 import { useStore } from "@/store/use-store";
 
 export function Dashboard() {
@@ -18,10 +18,7 @@ export function Dashboard() {
       <ExamDateBanner />
 
       <div className="flex gap-6">
-        <Card className="p-4 rounded-md">
-          <CardTitle className="text-xs font-medium text-muted-foreground mb-2 uppercase tracking-wider">
-            Activity
-          </CardTitle>
+        <Card className="p-3 rounded-md">
           <StreakCalendar entries={entries} compact />
         </Card>
 
@@ -36,7 +33,7 @@ export function Dashboard() {
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-[4fr_6fr] gap-6">
-        <div className="space-y-6">
+        <div className="space-y-8">
           <AddEntryForm />
 
           {entries.length > 0 && (

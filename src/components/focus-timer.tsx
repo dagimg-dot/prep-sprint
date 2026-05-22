@@ -84,7 +84,7 @@ export function FocusTimer() {
 
   return (
     <div className="flex h-full gap-3">
-      <div className="flex flex-col justify-center gap-1">
+      <div className="flex flex-col gap-1">
         {TEST_TYPES.map((t) => (
           <button
             key={t}
