@@ -1,6 +1,7 @@
 import { AddEntryForm } from "@/components/add-entry-form";
 import { EntryCard } from "@/components/entry-card";
 import { ExamDateBanner } from "@/components/exam-date-banner";
+import { FocusTimer } from "@/components/focus-timer";
 import { NotebookPanel } from "@/components/notebook-panel";
 import { StatsHeader } from "@/components/stats-header";
 import { StreakBadge } from "@/components/streak-badge";
@@ -24,8 +25,8 @@ export function Dashboard() {
           <StreakCalendar entries={entries} compact />
         </Card>
 
-        <Card className="flex-1 p-4 rounded-md flex items-center justify-center text-muted-foreground text-sm">
-          Placeholder
+        <Card className="flex-1 p-4 rounded-md">
+          <FocusTimer />
         </Card>
       </div>
 
