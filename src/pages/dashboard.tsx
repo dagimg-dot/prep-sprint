@@ -57,7 +57,7 @@ export function Dashboard() {
           )}
         </div>
 
-        <div className="lg:sticky lg:top-20 lg:self-start">
+        <div className="lg:sticky lg:top-20 lg:self-start lg:max-h-[calc(100dvh-8rem)]">
           <NotebookPanel />
         </div>
       </div>

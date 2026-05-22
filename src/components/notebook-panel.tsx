@@ -74,8 +74,8 @@ export function NotebookPanel() {
   );
 
   return (
-    <Card className="flex flex-col rounded-md">
-      <CardHeader className="flex-row items-center justify-between space-y-0 py-2">
+    <Card className="flex min-h-0 flex-col rounded-md">
+      <CardHeader className="flex-row items-center justify-between space-y-0 py-2 shrink-0">
         <CardTitle className="text-base">Notebook</CardTitle>
         <div className="flex items-center gap-1">
           <Button variant="outline" size="sm" onClick={handleNew}>
@@ -92,11 +92,11 @@ export function NotebookPanel() {
         </div>
       </CardHeader>
       <div
-        className={`overflow-hidden transition-all duration-300 ease-in-out ${
+        className={`overflow-hidden transition-all duration-300 ease-in-out flex-1 min-h-0 ${
           panelCollapsed ? "max-h-0 opacity-0" : "max-h-[2000px] opacity-100"
         }`}
       >
-        <CardContent className="flex flex-col gap-3 pt-0">
+        <CardContent className="flex h-full min-h-0 flex-col gap-3 overflow-y-auto pt-0">
           {noteList.length > 0 && (
             <div className="flex gap-1 flex-wrap">
               {noteList.map((n) => (
@@ -179,7 +179,7 @@ export function NotebookPanel() {
                       }
                     }}
                     placeholder="Write in markdown..."
-                    className="flex-1 w-full resize-none rounded-md border border-input bg-background p-3 text-sm outline-none focus:border-primary min-h-[200px]"
+                    className="flex-1 w-full resize-none rounded-md border border-input bg-background p-3 text-sm outline-none focus:border-primary min-h-[60px]"
                   />
 
                   <div className="flex items-center gap-2">
