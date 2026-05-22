@@ -80,14 +80,14 @@ export function NotebookPanel() {
           <Button variant="outline" size="sm" onClick={handleNew}>
             + New
           </Button>
-          <button
-            type="button"
+          <Button
+            variant="outline"
+            size="sm"
             onClick={togglePanel}
-            className="text-muted-foreground hover:text-foreground text-lg leading-none px-1 py-1 transition-transform duration-300"
             title={panelCollapsed ? "Expand notebook" : "Collapse notebook"}
           >
-            {panelCollapsed ? "\u203A" : "\u2039"}
-          </button>
+            {panelCollapsed ? "\u2193" : "\u2191"}
+          </Button>
         </div>
       </CardHeader>
       <div
