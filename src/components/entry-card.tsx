@@ -3,7 +3,6 @@ import { useState } from "react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
 import {
   Select,
   SelectContent,
@@ -14,7 +13,13 @@ import {
 import { Separator } from "@/components/ui/separator";
 import { Textarea } from "@/components/ui/textarea";
 import { useStore } from "@/store/use-store";
-import type { ErrorLogEntry, TestEntry } from "@/types";
+import {
+  type ErrorLogEntry,
+  ERROR_CATEGORIES,
+  QUESTION_TYPES,
+  type TestEntry,
+  type TestType,
+} from "@/types";
 import { TEST_TYPE_LABELS } from "@/types";
 
 interface EntryCardProps {
@@ -28,17 +33,6 @@ const typeColors: Record<string, string> = {
   writing: "bg-amber-500/15 text-amber-400 border-amber-500/30",
   speaking: "bg-rose-500/15 text-rose-400 border-rose-500/30",
 };
-
-const ERROR_CATEGORIES = [
-  "vocabulary",
-  "spelling",
-  "timing",
-  "misread",
-  "distracted",
-  "grammar",
-  "comprehension",
-  "other",
-] as const;
 
 function CollapsibleSection({
   title,
@@ -67,9 +61,11 @@ function CollapsibleSection({
 }
 
 function AddErrorForm({
+  testType,
   onSave,
   onCancel,
 }: {
+  testType: TestType;
   onSave: (error: ErrorLogEntry) => void;
   onCancel: () => void;
 }) {
@@ -93,18 +89,24 @@ function AddErrorForm({
     <div className="space-y-2 pt-2 border-t border-border">
       <p className="text-xs font-medium text-muted-foreground">New error</p>
       <div className="flex gap-2">
-        <Input
-          placeholder="Question type (e.g. TFNG)"
-          value={questionType}
-          onChange={(e) => setQuestionType(e.target.value)}
-          className="h-7 text-xs"
-        />
+        <Select value={questionType} onValueChange={setQuestionType}>
+          <SelectTrigger className="h-7 text-xs flex-1">
+            <SelectValue placeholder="Question type" />
+          </SelectTrigger>
+          <SelectContent>
+            {QUESTION_TYPES[testType].map((qt) => (
+              <SelectItem key={qt} value={qt} className="text-xs">
+                {qt}
+              </SelectItem>
+            ))}
+          </SelectContent>
+        </Select>
         <Select value={category} onValueChange={setCategory}>
-          <SelectTrigger className="h-7 text-xs w-32">
+          <SelectTrigger className="h-7 text-xs w-34">
             <SelectValue placeholder="Category" />
           </SelectTrigger>
           <SelectContent>
-            {ERROR_CATEGORIES.map((c) => (
+            {ERROR_CATEGORIES[testType].map((c) => (
               <SelectItem key={c} value={c} className="text-xs">
                 {c}
               </SelectItem>
@@ -153,6 +155,22 @@ export function EntryCard({ entry, onDelete }: EntryCardProps) {
   const removeError = useStore((s) => s.removeError);
   const [showErrorForm, setShowErrorForm] = useState(false);
   const [errorLogOpen, setErrorLogOpen] = useState(false);
+  const [copied, setCopied] = useState(false);
+
+  const copyErrorLog = () => {
+    const output = (entry.errorLog ?? []).map(
+      ({ questionType, category, mistake, fix }: ErrorLogEntry) => ({
+        questionType,
+        category,
+        mistake,
+        fix,
+      }),
+    );
+    navigator.clipboard.writeText(JSON.stringify(output, null, 2)).then(() => {
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    });
+  };
 
   const dateLabel = format(parseISO(entry.date), "MMM d");
   const isWriting = entry.testType === "writing";
@@ -250,31 +268,41 @@ export function EntryCard({ entry, onDelete }: EntryCardProps) {
               </>
             )}
 
-            {/* Error Log Section */}
             <Separator className="my-2" />
             <div>
-              <button
-                type="button"
-                onClick={() => setErrorLogOpen(!errorLogOpen)}
-                className="flex items-center gap-1.5 text-xs text-muted-foreground hover:text-foreground"
-              >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="12"
-                  height="12"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  className={`transition-transform ${errorLogOpen ? "rotate-90" : ""}`}
-                  aria-hidden="true"
+              <div className="flex items-center justify-between">
+                <button
+                  type="button"
+                  onClick={() => setErrorLogOpen(!errorLogOpen)}
+                  className="flex items-center gap-1.5 text-xs text-muted-foreground hover:text-foreground"
                 >
-                  <polyline points="9 18 15 12 9 6" />
-                </svg>
-                Error Log{errorCount > 0 ? ` (${errorCount})` : ""}
-              </button>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="12"
+                    height="12"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    className={`transition-transform ${errorLogOpen ? "rotate-90" : ""}`}
+                    aria-hidden="true"
+                  >
+                    <polyline points="9 18 15 12 9 6" />
+                  </svg>
+                  Error Log{errorCount > 0 ? ` (${errorCount})` : ""}
+                </button>
+                {errorCount > 0 && (
+                  <button
+                    type="button"
+                    onClick={copyErrorLog}
+                    className="text-xs text-muted-foreground hover:text-foreground underline underline-offset-2"
+                  >
+                    {copied ? "Copied!" : "Copy for agent"}
+                  </button>
+                )}
+              </div>
 
               {errorLogOpen && (
                 <div className="mt-2 space-y-2">
@@ -333,6 +361,7 @@ export function EntryCard({ entry, onDelete }: EntryCardProps) {
 
                   {showErrorForm ? (
                     <AddErrorForm
+                      testType={entry.testType}
                       onSave={(error) => {
                         addError(entry.id, error);
                         setShowErrorForm(false);
@@ -357,6 +386,24 @@ export function EntryCard({ entry, onDelete }: EntryCardProps) {
             <Badge className="text-base px-3 py-1" variant="default">
               {entry.score}
             </Badge>
+            {entry.rawScore != null && (
+              <span className="text-xs text-muted-foreground tabular-nums">
+                {entry.rawScore}{entry.rawMax != null ? `/${entry.rawMax}` : ""}
+              </span>
+            )}
+            {entry.partScores && entry.partScores.length > 0 && (
+              <div className="flex flex-wrap gap-1 justify-end">
+                {entry.partScores.map((ps) => (
+                  <Badge
+                    key={ps.label}
+                    variant="outline"
+                    className="text-[10px] font-normal"
+                  >
+                    {ps.label}: {ps.score}/{ps.max}
+                  </Badge>
+                ))}
+              </div>
+            )}
             <Button
               variant="ghost"
               size="sm"

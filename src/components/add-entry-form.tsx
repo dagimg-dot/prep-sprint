@@ -1,5 +1,5 @@
 import { format } from "date-fns";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { TypeSpecificFields } from "@/components/type-specific-fields";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -14,23 +14,14 @@ import {
 import { Textarea } from "@/components/ui/textarea";
 import { useStore } from "@/store/use-store";
 import {
+  ERROR_CATEGORIES,
   type ErrorLogEntry,
+  QUESTION_TYPES,
   TEST_TYPE_LABELS,
   TEST_TYPES,
   type TestEntry,
   type TestType,
 } from "@/types";
-
-const ERROR_CATEGORIES = [
-  "vocabulary",
-  "spelling",
-  "timing",
-  "misread",
-  "distracted",
-  "grammar",
-  "comprehension",
-  "other",
-] as const;
 
 export function AddEntryForm() {
   const addEntry = useStore((s) => s.addEntry);
@@ -43,6 +34,10 @@ export function AddEntryForm() {
   const [audioFileName, setAudioFileName] = useState("");
   const [notes, setNotes] = useState("");
   const [expanded, setExpanded] = useState(false);
+  const [rawScore, setRawScore] = useState("");
+  const [partScores, setPartScores] = useState<
+    { label: string; score: string; max: string }[]
+  >([]);
 
   const [errorLogOpen, setErrorLogOpen] = useState(false);
   const [pendingErrors, setPendingErrors] = useState<ErrorLogEntry[]>([]);
@@ -50,6 +45,25 @@ export function AddEntryForm() {
   const [errCategory, setErrCategory] = useState("");
   const [errMistake, setErrMistake] = useState("");
   const [errFix, setErrFix] = useState("");
+
+  useEffect(() => {
+    if (testType === "reading") {
+      setPartScores([
+        { label: "Passage 1", score: "", max: "13" },
+        { label: "Passage 2", score: "", max: "13" },
+        { label: "Passage 3", score: "", max: "14" },
+      ]);
+    } else if (testType === "listening") {
+      setPartScores([
+        { label: "Section 1", score: "", max: "10" },
+        { label: "Section 2", score: "", max: "10" },
+        { label: "Section 3", score: "", max: "10" },
+        { label: "Section 4", score: "", max: "10" },
+      ]);
+    } else {
+      setPartScores([]);
+    }
+  }, [testType]);
 
   const addPendingError = () => {
     if (!errMistake.trim()) return;
@@ -73,14 +87,44 @@ export function AddEntryForm() {
     setPendingErrors((prev) => prev.filter((e) => e.id !== id));
   };
 
+  const [copied, setCopied] = useState(false);
+
+  const copyErrorLog = () => {
+    const output = pendingErrors.map(
+      ({ questionType, category, mistake, fix }) => ({
+        questionType,
+        category,
+        mistake,
+        fix,
+      }),
+    );
+    navigator.clipboard.writeText(JSON.stringify(output, null, 2)).then(() => {
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    });
+  };
+
   const handleSubmit = () => {
     if (!testName.trim() || !score.trim()) return;
+
+    const parsedRaw = parseInt(rawScore, 10);
+    const parsedParts = partScores
+      .map((p) => ({
+        label: p.label,
+        score: parseInt(p.score, 10),
+        max: parseInt(p.max, 10),
+      }))
+      .filter((p) => !Number.isNaN(p.score));
 
     const entry: TestEntry = {
       id: crypto.randomUUID(),
       testName: testName.trim(),
       testType,
       score: parseFloat(score),
+      rawScore: !Number.isNaN(parsedRaw) ? parsedRaw : undefined,
+      rawMax:
+        testType === "reading" || testType === "listening" ? 40 : undefined,
+      partScores: parsedParts.length > 0 ? parsedParts : undefined,
       notes: notes.trim(),
       date: format(new Date(), "yyyy-MM-dd"),
       testLink: undefined,
@@ -108,6 +152,8 @@ export function AddEntryForm() {
     setTestName("");
     setTestType("listening");
     setScore("");
+    setRawScore("");
+    setPartScores([]);
     setTestLink("");
     setWritingTask1("");
     setWritingTask2("");
@@ -179,6 +225,10 @@ export function AddEntryForm() {
           onWritingTask1Change={setWritingTask1}
           onWritingTask2Change={setWritingTask2}
           onAudioFileChange={setAudioFileName}
+          rawScore={rawScore}
+          onRawScoreChange={setRawScore}
+          partScores={partScores}
+          onPartScoresChange={setPartScores}
         />
 
         <Textarea
@@ -216,6 +266,20 @@ export function AddEntryForm() {
 
           {errorLogOpen && (
             <div className="mt-2 space-y-2">
+              {pendingErrors.length > 0 && (
+                <div className="flex items-center justify-between">
+                  <span className="text-xs text-muted-foreground">
+                    {pendingErrors.length} pending
+                  </span>
+                  <button
+                    type="button"
+                    onClick={copyErrorLog}
+                    className="text-xs text-muted-foreground hover:text-foreground underline underline-offset-2"
+                  >
+                    {copied ? "Copied!" : "Copy for agent"}
+                  </button>
+                </div>
+              )}
               {pendingErrors.map((err) => (
                 <div
                   key={err.id}
@@ -266,18 +330,27 @@ export function AddEntryForm() {
 
               <div className="space-y-2 pt-1">
                 <div className="flex gap-2">
-                  <Input
-                    placeholder="Question type (e.g. TFNG)"
+                  <Select
                     value={errQuestionType}
-                    onChange={(e) => setErrQuestionType(e.target.value)}
-                    className="h-7 text-xs"
-                  />
+                    onValueChange={setErrQuestionType}
+                  >
+                    <SelectTrigger className="h-7 text-xs flex-1">
+                      <SelectValue placeholder="Question type" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      {QUESTION_TYPES[testType].map((qt) => (
+                        <SelectItem key={qt} value={qt} className="text-xs">
+                          {qt}
+                        </SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
                   <Select value={errCategory} onValueChange={setErrCategory}>
-                    <SelectTrigger className="h-7 text-xs w-32">
+                    <SelectTrigger className="h-7 text-xs w-34">
                       <SelectValue placeholder="Category" />
                     </SelectTrigger>
                     <SelectContent>
-                      {ERROR_CATEGORIES.map((c) => (
+                      {ERROR_CATEGORIES[testType].map((c) => (
                         <SelectItem key={c} value={c} className="text-xs">
                           {c}
                         </SelectItem>
