@@ -19,7 +19,16 @@ export function NotebookPanel() {
   const [body, setBody] = useState("");
   const [preview, setPreview] = useState(false);
   const [readMode, setReadMode] = useState(false);
-  const [zenMode, setZenMode] = useState(false);
+  const [zenOpen, setZenOpen] = useState(false);
+  const [zenVisible, setZenVisible] = useState(false);
+  const openZen = useCallback(() => {
+    setZenOpen(true);
+    requestAnimationFrame(() => setZenVisible(true));
+  }, []);
+  const closeZen = useCallback(() => {
+    setZenVisible(false);
+    setTimeout(() => setZenOpen(false), 200);
+  }, []);
   const debounceRef = useRef<ReturnType<typeof setTimeout> | undefined>(
     undefined,
   );
@@ -67,17 +76,16 @@ export function NotebookPanel() {
         e.preventDefault();
         setReadMode((r) => !r);
       }
-      if (e.key === "Escape") {
-        setZenMode(false);
-      }
+      if (e.key === "Escape") closeZen();
       if ((e.ctrlKey || e.metaKey) && e.shiftKey && (e.key === "Z" || e.key === "z")) {
         e.preventDefault();
-        setZenMode((z) => !z);
+        if (zenOpen) closeZen();
+        else openZen();
       }
     };
     window.addEventListener("keydown", handler);
     return () => window.removeEventListener("keydown", handler);
-  }, []);
+  }, [zenOpen, openZen, closeZen]);
 
   const handleNew = () => {
     if (panelCollapsed) togglePanel();
@@ -120,15 +128,15 @@ export function NotebookPanel() {
   );
 
   useEffect(() => {
-    if (!zenMode) return;
+    if (!zenOpen) return;
     const handler = (e: MouseEvent) => {
       if (zenContentRef.current && !zenContentRef.current.contains(e.target as Node)) {
-        setZenMode(false);
+        closeZen();
       }
     };
     document.addEventListener("mousedown", handler);
     return () => document.removeEventListener("mousedown", handler);
-  }, [zenMode]);
+  }, [zenOpen, closeZen]);
 
   return (
     <>
@@ -207,7 +215,7 @@ export function NotebookPanel() {
                   </button>
                   <button
                     type="button"
-                    onClick={() => setZenMode(true)}
+                    onClick={openZen}
                     className="text-xs text-muted-foreground hover:text-foreground underline underline-offset-2 shrink-0"
                     title="Zen view (Ctrl+Shift+Z)"
                   >
@@ -302,22 +310,32 @@ export function NotebookPanel() {
       </div>
     </Card>
 
-      {zenMode && activeNote && (
-        <div className="fixed inset-0 z-50 flex items-start justify-center bg-black/60 backdrop-blur-2xl">
+      {zenOpen && activeNote && (
+        <div
+          className={`fixed inset-0 z-50 flex items-center justify-center transition-all duration-200 ease-out ${
+            zenVisible
+              ? "bg-background/80 backdrop-blur-xl"
+              : "bg-transparent backdrop-blur-none"
+          }`}
+        >
           <div
             ref={zenContentRef}
-            className="relative w-full max-w-3xl mx-auto mt-12 mb-12 p-8"
+            className={`relative w-full max-w-3xl mx-4 max-h-[85vh] overflow-y-auto rounded-xl border bg-card p-8 shadow-2xl transition-all duration-200 ease-out ${
+              zenVisible
+                ? "opacity-100 scale-100"
+                : "opacity-0 scale-95"
+            }`}
           >
             <button
               type="button"
-              onClick={() => setZenMode(false)}
-              onKeyDown={(e) => { if (e.key === "Enter" || e.key === " ") setZenMode(false); }}
-              className="absolute top-2 right-2 text-muted-foreground hover:text-foreground text-lg leading-none w-8 h-8 flex items-center justify-center rounded-full hover:bg-muted transition-colors"
+              onClick={closeZen}
+              onKeyDown={(e) => { if (e.key === "Enter" || e.key === " ") closeZen(); }}
+              className="absolute top-3 right-3 text-muted-foreground hover:text-foreground text-lg leading-none w-8 h-8 flex items-center justify-center rounded-full hover:bg-muted transition-colors"
               aria-label="Close zen view"
             >
               ✕
             </button>
-            <h2 className="text-xl font-semibold mb-6 text-foreground">
+            <h2 className="text-xl font-semibold mb-6 pr-8 text-foreground">
               {title}
             </h2>
             <div className="prose prose-sm prose-invert max-w-none">
