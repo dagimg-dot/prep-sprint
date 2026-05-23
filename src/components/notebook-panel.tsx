@@ -19,6 +19,7 @@ export function NotebookPanel() {
   const [body, setBody] = useState("");
   const [preview, setPreview] = useState(false);
   const [readMode, setReadMode] = useState(false);
+  const [zenMode, setZenMode] = useState(false);
   const debounceRef = useRef<ReturnType<typeof setTimeout> | undefined>(
     undefined,
   );
@@ -66,6 +67,13 @@ export function NotebookPanel() {
         e.preventDefault();
         setReadMode((r) => !r);
       }
+      if (e.key === "Escape") {
+        setZenMode(false);
+      }
+      if ((e.ctrlKey || e.metaKey) && e.shiftKey && (e.key === "Z" || e.key === "z")) {
+        e.preventDefault();
+        setZenMode((z) => !z);
+      }
     };
     window.addEventListener("keydown", handler);
     return () => window.removeEventListener("keydown", handler);
@@ -83,6 +91,7 @@ export function NotebookPanel() {
   const cardRef = useRef<HTMLDivElement>(null);
   const headerRef = useRef<HTMLDivElement>(null);
   const textareaRef = useRef<HTMLTextAreaElement>(null);
+  const zenContentRef = useRef<HTMLDivElement>(null);
   const [contentMaxH, setContentMaxH] = useState<number | null>(null);
 
   useEffect(() => {
@@ -110,7 +119,19 @@ export function NotebookPanel() {
     (a, b) => new Date(b.updatedAt).getTime() - new Date(a.updatedAt).getTime(),
   );
 
+  useEffect(() => {
+    if (!zenMode) return;
+    const handler = (e: MouseEvent) => {
+      if (zenContentRef.current && !zenContentRef.current.contains(e.target as Node)) {
+        setZenMode(false);
+      }
+    };
+    document.addEventListener("mousedown", handler);
+    return () => document.removeEventListener("mousedown", handler);
+  }, [zenMode]);
+
   return (
+    <>
     <Card ref={cardRef} className="flex flex-col rounded-md">
       <CardHeader
         ref={headerRef}
@@ -183,6 +204,14 @@ export function NotebookPanel() {
                     title={`${readMode ? "Edit" : "Read"} (Ctrl+Shift+E)`}
                   >
                     {readMode ? "Edit" : "Read"}
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => setZenMode(true)}
+                    className="text-xs text-muted-foreground hover:text-foreground underline underline-offset-2 shrink-0"
+                    title="Zen view (Ctrl+Shift+Z)"
+                  >
+                    Zen
                   </button>
                   <Button
                     variant="ghost"
@@ -272,5 +301,33 @@ export function NotebookPanel() {
         </div>
       </div>
     </Card>
+
+      {zenMode && activeNote && (
+        <div className="fixed inset-0 z-50 flex items-start justify-center bg-black/60 backdrop-blur-2xl">
+          <div
+            ref={zenContentRef}
+            className="relative w-full max-w-3xl mx-auto mt-12 mb-12 p-8"
+          >
+            <button
+              type="button"
+              onClick={() => setZenMode(false)}
+              onKeyDown={(e) => { if (e.key === "Enter" || e.key === " ") setZenMode(false); }}
+              className="absolute top-2 right-2 text-muted-foreground hover:text-foreground text-lg leading-none w-8 h-8 flex items-center justify-center rounded-full hover:bg-muted transition-colors"
+              aria-label="Close zen view"
+            >
+              ✕
+            </button>
+            <h2 className="text-xl font-semibold mb-6 text-foreground">
+              {title}
+            </h2>
+            <div className="prose prose-sm prose-invert max-w-none">
+              <Markdown remarkPlugins={[remarkGfm]}>
+                {body || "*Empty*"}
+              </Markdown>
+            </div>
+          </div>
+        </div>
+      )}
+    </>
   );
 }
