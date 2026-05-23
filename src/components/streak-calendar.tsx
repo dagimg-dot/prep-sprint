@@ -4,8 +4,11 @@ import {
   format,
   getMonth,
   isSameDay,
+  parseISO,
   startOfWeek,
+  subDays,
 } from "date-fns";
+import { useStore } from "@/store/use-store";
 
 export function StreakCalendar({
   entries,
@@ -15,8 +18,13 @@ export function StreakCalendar({
   compact?: boolean;
 }) {
   const today = new Date();
-  const sprintStart = new Date(2026, 4, 22); // May 22
-  const sprintEnd = new Date(2026, 5, 17); // June 17
+  const targetDate = useStore((s) => s.targetDate);
+  const { sprintStart, sprintEnd } = targetDate
+    ? (() => {
+        const exam = parseISO(targetDate);
+        return { sprintStart: subDays(exam, 24), sprintEnd: exam };
+      })()
+    : { sprintStart: subDays(today, 24), sprintEnd: today };
   const startDate = startOfWeek(sprintStart, { weekStartsOn: 1 });
 
   const entryCounts = new Map<string, number>();
@@ -75,7 +83,7 @@ export function StreakCalendar({
     return "bg-emerald-600";
   };
 
-  const dayLabels = ["", "M", "", "W", "", "F", ""];
+  const dayLabels = ["M", "", "W", "", "F", "", ""];
 
   return (
     <div
