@@ -1,0 +1,904 @@
+{
+  "version": 1,
+  "name": "IELTS 24-Day Sprint Plan",
+  "days": [
+    {
+      "dayNumber": 1,
+      "phase": 1,
+      "title": "Saturday (6–8 hrs available)",
+      "tasks": [
+        {
+          "id": "task-1-1",
+          "text": "Download Cambridge IELTS 15–20 from [ieltsworldly.com](https://www.ieltsworldly.com/cambridge-ielts-19-pdf/)",
+          "done": false
+        },
+        {
+          "id": "task-1-2",
+          "text": "Watch [IELTS Liz \"IELTS Exam Format\"](https://www.youtube.com/@ieltsliz) (20 min) — understand the test structure",
+          "done": false
+        },
+        {
+          "id": "task-1-3",
+          "text": "Read official Band 7 descriptors from [ielts.org](https://ielts.org/take-a-test/preparation-resources)",
+          "done": false
+        },
+        {
+          "id": "task-1-4",
+          "text": "**TAKE FULL MOCK TEST #1** using [ieltstestsimulation.com](https://www.ieltstestsimulation.com/) (Cambridge 15 Test 1, timed, 2h45min) or [ieltsonlinetests.com](https://ieltsonlinetests.com/ielts-exam-library)",
+          "done": false
+        },
+        {
+          "id": "task-1-5",
+          "text": "Score yourself (Listening/Reading = raw count; Writing/Speaking = self-assess vs descriptors)",
+          "done": false
+        },
+        {
+          "id": "task-1-6",
+          "text": "**Log results in PrepSprint** `+ Add test result` → fill test name, type, score, notes",
+          "done": false
+        },
+        {
+          "id": "task-1-7",
+          "text": "Identify your weakest section → this gets 50% of study time going forward",
+          "done": false
+        },
+        {
+          "id": "task-1-8",
+          "text": "Set up Anki with an IELTS vocabulary deck from [ankiweb.net](https://apps.ankiweb.net/)",
+          "done": false
+        },
+        {
+          "id": "task-1-9",
+          "text": "Set up an error log in **PrepSprint Notebook** (or Notion) — date, error type, correct answer, pattern",
+          "done": false
+        }
+      ]
+    },
+    {
+      "dayNumber": 2,
+      "phase": 1,
+      "title": "Sunday (5–7 hrs)",
+      "tasks": [
+        {
+          "id": "task-2-1",
+          "text": "REVIEW mock test in detail — categorize EVERY wrong answer:",
+          "done": false
+        },
+        {
+          "id": "task-2-2",
+          "text": "Watch [IELTS Liz \"Writing Task 2 Introduction Formula\"](https://www.youtube.com/@ieltsliz) on YouTube",
+          "done": false
+        },
+        {
+          "id": "task-2-3",
+          "text": "Write 1 Task 2 essay (timed 40min) — use Liz's formula; log in **PrepSprint**",
+          "done": false
+        },
+        {
+          "id": "task-2-4",
+          "text": "Run essay through [ChatGPT](https://chat.openai.com/) with this prompt:",
+          "done": false
+        },
+        {
+          "id": "task-2-5",
+          "text": "Watch [IELTS Simon \"Reading: True/False/Not Given\"](https://www.youtube.com/@Ieltssimon) strategy video",
+          "done": false
+        },
+        {
+          "id": "task-2-6",
+          "text": "Practice 1 Reading passage (timed 20min) from [ieltsolve.com](https://www.ieltsolve.com/) Cambridge 15 Test 2",
+          "done": false
+        },
+        {
+          "id": "task-2-7",
+          "text": "Start daily [BBC 6 Minute English](https://www.bbc.co.uk/learningenglish/english/features/6-minute-english) habit (20min)",
+          "done": false
+        },
+        {
+          "id": "task-2-8",
+          "text": "Use **PrepSprint Focus Timer** for all timed sections — build the habit",
+          "done": false
+        }
+      ]
+    },
+    {
+      "dayNumber": 3,
+      "phase": 1,
+      "title": "Monday (2.5 hrs — weekday night)",
+      "tasks": [
+        {
+          "id": "task-3-1",
+          "text": "[BBC 6 Minute English](https://www.bbc.co.uk/learningenglish/english/features/6-minute-english) (20min) — listen + read transcript",
+          "done": false
+        },
+        {
+          "id": "task-3-2",
+          "text": "1 full Listening test on [ieltsolve.com](https://www.ieltsolve.com/) (Cambridge 15 Test 2, 30min) — use **PrepSprint Focus Timer**",
+          "done": false
+        },
+        {
+          "id": "task-3-3",
+          "text": "Review every wrong answer in Listening — add to error log in **PrepSprint Notebook**",
+          "done": false
+        },
+        {
+          "id": "task-3-4",
+          "text": "Watch [Fastrack IELTS \"Top 10 Listening Mistakes\"](https://www.youtube.com/@FastrackIELTS) video",
+          "done": false
+        },
+        {
+          "id": "task-3-5",
+          "text": "Anki vocabulary: 15 new words + review",
+          "done": false
+        },
+        {
+          "id": "task-3-6",
+          "text": "Speaking Part 1 practice — record 5 answers on your phone, listen back",
+          "done": false
+        }
+      ]
+    },
+    {
+      "dayNumber": 4,
+      "phase": 2,
+      "title": "Tuesday (2.5 hrs)",
+      "tasks": [
+        {
+          "id": "task-4-1",
+          "text": "[BBC 6 Minute English](https://www.bbc.co.uk/learningenglish/english/features/6-minute-english) (20min)",
+          "done": false
+        },
+        {
+          "id": "task-4-2",
+          "text": "Reading: 2 passages timed (20min each = 40min) from [ieltstestsimulation.com](https://www.ieltstestsimulation.com/) Cambridge 15",
+          "done": false
+        },
+        {
+          "id": "task-4-3",
+          "text": "REVIEW both passages — add wrong answers to error log in **PrepSprint Notebook**",
+          "done": false
+        },
+        {
+          "id": "task-4-4",
+          "text": "Watch [IELTS Advantage \"Reading: Matching Headings Strategy\"](https://www.youtube.com/@Ieltsadvantage)",
+          "done": false
+        },
+        {
+          "id": "task-4-5",
+          "text": "Anki: 15 new words",
+          "done": false
+        },
+        {
+          "id": "task-4-6",
+          "text": "Speaking: Record Part 2 cue card (2min), listen back, identify improvements",
+          "done": false
+        }
+      ]
+    },
+    {
+      "dayNumber": 5,
+      "phase": 2,
+      "title": "Wednesday (2.5 hrs)",
+      "tasks": [
+        {
+          "id": "task-5-1",
+          "text": "[BBC 6 Minute English](https://www.bbc.co.uk/learningenglish/english/features/6-minute-english) (15min)",
+          "done": false
+        },
+        {
+          "id": "task-5-2",
+          "text": "WRITING INTENSIVE:",
+          "done": false
+        },
+        {
+          "id": "task-5-3",
+          "text": "Run both through [engnovate.com](https://engnovate.com/) for AI feedback",
+          "done": false
+        },
+        {
+          "id": "task-5-4",
+          "text": "**Log both in PrepSentry** with scores and paste the AI feedback in notes",
+          "done": false
+        },
+        {
+          "id": "task-5-5",
+          "text": "Add feedback points to a \"Writing Fix List\" in **PrepSprint Notebook**",
+          "done": false
+        },
+        {
+          "id": "task-5-6",
+          "text": "Speaking: Part 3 practice — 3 questions, extend answers with examples",
+          "done": false
+        }
+      ]
+    },
+    {
+      "dayNumber": 6,
+      "phase": 2,
+      "title": "Thursday (2.5 hrs)",
+      "tasks": [
+        {
+          "id": "task-6-1",
+          "text": "[BBC 6 Minute English](https://www.bbc.co.uk/learningenglish/english/features/6-minute-english) (15min)",
+          "done": false
+        },
+        {
+          "id": "task-6-2",
+          "text": "FULL LISTENING TEST on [ieltsonlinetests.com](https://ieltsonlinetests.com/ielts-exam-library) (Cambridge 15 Test 3, 30min) — timed",
+          "done": false
+        },
+        {
+          "id": "task-6-3",
+          "text": "REVIEW with audio script — underline missed answers",
+          "done": false
+        },
+        {
+          "id": "task-6-4",
+          "text": "Watch [E2 IELTS \"Listening: Map Labelling & Multiple Choice\"](https://www.youtube.com/@E2IELTS)",
+          "done": false
+        },
+        {
+          "id": "task-6-5",
+          "text": "Reading: 1 full test (60min) — [ieltstestsimulation.com](https://www.ieltstestsimulation.com/) Cambridge 16 Test 1",
+          "done": false
+        },
+        {
+          "id": "task-6-6",
+          "text": "**Log tests in PrepSprint** — update error log",
+          "done": false
+        },
+        {
+          "id": "task-6-7",
+          "text": "Anki: review + 15 new words",
+          "done": false
+        }
+      ]
+    },
+    {
+      "dayNumber": 7,
+      "phase": 2,
+      "title": "Friday (2.5 hrs)",
+      "tasks": [
+        {
+          "id": "task-7-1",
+          "text": "[BBC 6 Minute English](https://www.bbc.co.uk/learningenglish/english/features/6-minute-english) (15min)",
+          "done": false
+        },
+        {
+          "id": "task-7-2",
+          "text": "WRITING: Rewrite 1 essay from Day 5 incorporating AI feedback",
+          "done": false
+        },
+        {
+          "id": "task-7-3",
+          "text": "Compare before/after — note what changed in **PrepSprint Notebook**",
+          "done": false
+        },
+        {
+          "id": "task-7-4",
+          "text": "Speaking: Join free Telegram speaking groups (search \"IELTS Speaking Practice\" in Telegram) for 20min live practice",
+          "done": false
+        },
+        {
+          "id": "task-7-5",
+          "text": "Watch [IELTS Simon \"Writing Task 1: How to Write an Overview\"](https://www.youtube.com/@Ieltssimon)",
+          "done": false
+        },
+        {
+          "id": "task-7-6",
+          "text": "Anki review",
+          "done": false
+        }
+      ]
+    },
+    {
+      "dayNumber": 8,
+      "phase": 2,
+      "title": "Saturday (6–8 hrs) — FULL MOCK DAY",
+      "tasks": [
+        {
+          "id": "task-8-1",
+          "text": "**FULL MOCK TEST #2** on [ieltsonlinetests.com](https://ieltsonlinetests.com/ielts-exam-library) (Cambridge 16 Test 2, timed, 2h45min)",
+          "done": false
+        },
+        {
+          "id": "task-8-2",
+          "text": "30min break",
+          "done": false
+        },
+        {
+          "id": "task-8-3",
+          "text": "REVIEW ENTIRE TEST (2–3 hours):",
+          "done": false
+        },
+        {
+          "id": "task-8-4",
+          "text": "**Log everything in PrepSprint** — use per-type entry cards",
+          "done": false
+        },
+        {
+          "id": "task-8-5",
+          "text": "Update error log → identify TOP 3 error patterns",
+          "done": false
+        },
+        {
+          "id": "task-8-6",
+          "text": "Watch YouTube on your #1 error pattern from the channels above",
+          "done": false
+        },
+        {
+          "id": "task-8-7",
+          "text": "Create a \"One-Page Cheat Sheet\" in **PrepSprint Notebook** with your personal error patterns + fixes",
+          "done": false
+        }
+      ]
+    },
+    {
+      "dayNumber": 9,
+      "phase": 2,
+      "title": "Sunday (5–7 hrs)",
+      "tasks": [
+        {
+          "id": "task-9-1",
+          "text": "WEAK AREA DRILL — spend 3 hours on your lowest-scoring section",
+          "done": false
+        },
+        {
+          "id": "task-9-2",
+          "text": "STRONG SECTION MAINTENANCE (1 hour):",
+          "done": false
+        },
+        {
+          "id": "task-9-3",
+          "text": "Speaking: Record full Speaking test (Parts 1+2+3, 15min) — use [ieltsup.com speaking simulator](https://ielts-up.com/ielts-speaking-simulator.html)",
+          "done": false
+        },
+        {
+          "id": "task-9-4",
+          "text": "Review recording, count hesitations, note repeated vocab",
+          "done": false
+        },
+        {
+          "id": "task-9-5",
+          "text": "**Log all in PrepSprint**",
+          "done": false
+        },
+        {
+          "id": "task-9-6",
+          "text": "Plan next week's focus based on error patterns",
+          "done": false
+        }
+      ]
+    },
+    {
+      "dayNumber": 10,
+      "phase": 2,
+      "title": "Monday (2.5 hrs)",
+      "tasks": [
+        {
+          "id": "task-10-1",
+          "text": "[BBC 6 Minute English](https://www.bbc.co.uk/learningenglish/english/features/6-minute-english) (15min)",
+          "done": false
+        },
+        {
+          "id": "task-10-2",
+          "text": "FULL LISTENING TEST on [ieltsonlinetests.com](https://ieltsonlinetests.com/ielts-exam-library) (Cambridge 16 Test 3, 30min) — focus on Section 4",
+          "done": false
+        },
+        {
+          "id": "task-10-3",
+          "text": "REVIEW Section 4 specifically — practice with [TED Talks](https://www.ted.com/talks) at 1.25x speed",
+          "done": false
+        },
+        {
+          "id": "task-10-4",
+          "text": "Reading: 1 full test (60min) on [ieltstestsimulation.com](https://www.ieltstestsimulation.com/) — focus on Passage 3 timing (allow 25min)",
+          "done": false
+        },
+        {
+          "id": "task-10-5",
+          "text": "**Log in PrepSprint** — update error log",
+          "done": false
+        },
+        {
+          "id": "task-10-6",
+          "text": "Anki: 15 new words + review all",
+          "done": false
+        }
+      ]
+    },
+    {
+      "dayNumber": 11,
+      "phase": 3,
+      "title": "Tuesday (2.5 hrs)",
+      "tasks": [
+        {
+          "id": "task-11-1",
+          "text": "[BBC 6 Minute English](https://www.bbc.co.uk/learningenglish/english/features/6-minute-english) (15min)",
+          "done": false
+        },
+        {
+          "id": "task-11-2",
+          "text": "WRITING: Write 1 Task 2 essay on a HARD topic from [ieltsliz.com 2026 topics](https://ieltsliz.com/ielts-essay-topics-for-2026/)",
+          "done": false
+        },
+        {
+          "id": "task-11-3",
+          "text": "AI feedback via [engnovate.com](https://engnovate.com/) → note recurring grammar errors",
+          "done": false
+        },
+        {
+          "id": "task-11-4",
+          "text": "Study 1 grammar topic from [ielts-up.com exercises](https://ielts-up.com/exercises/free-ielts-exercises.html)",
+          "done": false
+        },
+        {
+          "id": "task-11-5",
+          "text": "Speaking: Part 2 practice — 3 different cue cards from [ieltsliz.com](https://ieltsliz.com/), record all",
+          "done": false
+        },
+        {
+          "id": "task-11-6",
+          "text": "Anki: review + 15 new collocations",
+          "done": false
+        }
+      ]
+    },
+    {
+      "dayNumber": 12,
+      "phase": 3,
+      "title": "Wednesday (2.5 hrs)",
+      "tasks": [
+        {
+          "id": "task-12-1",
+          "text": "[BBC 6 Minute English](https://www.bbc.co.uk/learningenglish/english/features/6-minute-english) (15min)",
+          "done": false
+        },
+        {
+          "id": "task-12-2",
+          "text": "LISTENING FOCUS: Section 4 only from 3 different tests on [ieltsolve.com](https://www.ieltsolve.com/) (Cambridge 16 Test 4, Cambridge 17 Tests 1–2)",
+          "done": false
+        },
+        {
+          "id": "task-12-3",
+          "text": "Reading FOCUS: Matching Headings questions only (20 questions from 2 passages)",
+          "done": false
+        },
+        {
+          "id": "task-12-4",
+          "text": "Watch [Fastrack IELTS \"True/False/Not Given — The Complete Guide\"](https://www.youtube.com/@FastrackIELTS)",
+          "done": false
+        },
+        {
+          "id": "task-12-5",
+          "text": "Error log review in **PrepSprint Notebook** (10min — read through all errors from past 2 weeks)",
+          "done": false
+        }
+      ]
+    },
+    {
+      "dayNumber": 13,
+      "phase": 3,
+      "title": "Thursday (2.5 hrs)",
+      "tasks": [
+        {
+          "id": "task-13-1",
+          "text": "[BBC 6 Minute English](https://www.bbc.co.uk/learningenglish/english/features/6-minute-english) (15min)",
+          "done": false
+        },
+        {
+          "id": "task-13-2",
+          "text": "WRITING: Write 1 Task 1 (graph/chart) + 1 Task 2 from [ielts-up.com](https://ielts-up.com/writing/ielts-writing-practice.html)",
+          "done": false
+        },
+        {
+          "id": "task-13-3",
+          "text": "STUDY: 5 Band 9 sample essays from [ieltsliz.com](https://ieltsliz.com/) — extract 3 vocabulary phrases from each",
+          "done": false
+        },
+        {
+          "id": "task-13-4",
+          "text": "Speaking: Part 1 — 10 questions from [ieltstestsimulation.com](https://www.ieltstestsimulation.com/wb-cnt/speaking/overview/), give 3+ sentence answers each",
+          "done": false
+        },
+        {
+          "id": "task-13-5",
+          "text": "Add new phrases to Anki",
+          "done": false
+        },
+        {
+          "id": "task-13-6",
+          "text": "Read 1 article from [The Guardian](https://www.theguardian.com/international) (science/tech section)",
+          "done": false
+        }
+      ]
+    },
+    {
+      "dayNumber": 14,
+      "phase": 3,
+      "title": "Friday (2.5 hrs)",
+      "tasks": [
+        {
+          "id": "task-14-1",
+          "text": "[BBC 6 Minute English](https://www.bbc.co.uk/learningenglish/english/features/6-minute-english) (15min)",
+          "done": false
+        },
+        {
+          "id": "task-14-2",
+          "text": "LIGHT REVIEW DAY:",
+          "done": false
+        },
+        {
+          "id": "task-14-3",
+          "text": "1 Listening test on [ieltsolve.com](https://www.ieltsolve.com/) (Cambridge 17 Test 1, 30min) — aim for 30+/40",
+          "done": false
+        },
+        {
+          "id": "task-14-4",
+          "text": "1 Reading test on [ieltsolve.com](https://www.ieltsolve.com/) (Cambridge 17 Test 1, 60min) — aim for 30+/40",
+          "done": false
+        },
+        {
+          "id": "task-14-5",
+          "text": "Speaking: Telegram voice chat (20min)",
+          "done": false
+        },
+        {
+          "id": "task-14-6",
+          "text": "Prepare mentally for tomorrow's mock",
+          "done": false
+        }
+      ]
+    },
+    {
+      "dayNumber": 15,
+      "phase": 3,
+      "title": "Saturday (6–8 hrs) — FULL MOCK #3 + ANALYSIS",
+      "tasks": [
+        {
+          "id": "task-15-1",
+          "text": "**FULL MOCK TEST #3** on [ieltstestsimulation.com](https://www.ieltstestsimulation.com/) (Cambridge 17 Test 2, timed, 2h45min)",
+          "done": false
+        },
+        {
+          "id": "task-15-2",
+          "text": "30min break",
+          "done": false
+        },
+        {
+          "id": "task-15-3",
+          "text": "COMPREHENSIVE REVIEW (3 hours):",
+          "done": false
+        },
+        {
+          "id": "task-15-4",
+          "text": "**Log all in PrepSprint** — compare with Stats page",
+          "done": false
+        },
+        {
+          "id": "task-15-5",
+          "text": "Create \"Final 10-Day Strategy\": 3 things to focus on",
+          "done": false
+        },
+        {
+          "id": "task-15-6",
+          "text": "Watch 1 video on weakest area from YouTube channels above",
+          "done": false
+        }
+      ]
+    },
+    {
+      "dayNumber": 16,
+      "phase": 3,
+      "title": "Sunday (5–7 hrs)",
+      "tasks": [
+        {
+          "id": "task-16-1",
+          "text": "TARGETED WEAK AREA (3 hours):",
+          "done": false
+        },
+        {
+          "id": "task-16-2",
+          "text": "STRONG AREA MAINTENANCE (1.5 hours): quick test in best section",
+          "done": false
+        },
+        {
+          "id": "task-16-3",
+          "text": "REVIEW common mistakes from research:",
+          "done": false
+        },
+        {
+          "id": "task-16-4",
+          "text": "Anki: massive review session (all cards)",
+          "done": false
+        }
+      ]
+    },
+    {
+      "dayNumber": 17,
+      "phase": 3,
+      "title": "Monday (2.5 hrs)",
+      "tasks": [
+        {
+          "id": "task-17-1",
+          "text": "[BBC 6 Minute English](https://www.bbc.co.uk/learningenglish/english/features/6-minute-english) (15min)",
+          "done": false
+        },
+        {
+          "id": "task-17-2",
+          "text": "Listening: Cambridge 17 Test 3 on [ieltsolve.com](https://www.ieltsolve.com/) (30min, timed)",
+          "done": false
+        },
+        {
+          "id": "task-17-3",
+          "text": "Review — spelling mistakes: write out every misspelled word 5 times",
+          "done": false
+        },
+        {
+          "id": "task-17-4",
+          "text": "Reading: Cambridge 17 Test 3 Passage 1+2 on [ieltsolve.com](https://www.ieltsolve.com/) (40min timed)",
+          "done": false
+        },
+        {
+          "id": "task-17-5",
+          "text": "Add new vocab to Anki",
+          "done": false
+        },
+        {
+          "id": "task-17-6",
+          "text": "Speaking: Record Part 2 + Part 3, reduce filler words",
+          "done": false
+        }
+      ]
+    },
+    {
+      "dayNumber": 18,
+      "phase": 4,
+      "title": "Tuesday (2.5 hrs)",
+      "tasks": [
+        {
+          "id": "task-18-1",
+          "text": "[BBC 6 Minute English](https://www.bbc.co.uk/learningenglish/english/features/6-minute-english) (15min)",
+          "done": false
+        },
+        {
+          "id": "task-18-2",
+          "text": "WRITING: Task 2 only — write 1 Opinion essay from [ieltsliz.com 2026 topics](https://ieltsliz.com/ielts-essay-topics-for-2026/) (timed 40min)",
+          "done": false
+        },
+        {
+          "id": "task-18-3",
+          "text": "AI feedback via [ielts-gpt.com](https://ielts-gpt.com/) → check Task Response",
+          "done": false
+        },
+        {
+          "id": "task-18-4",
+          "text": "STUDY: 3 Band 9 essays from [ieltsliz.com](https://ieltsliz.com/) — highlight structure",
+          "done": false
+        },
+        {
+          "id": "task-18-5",
+          "text": "Speaking: Part 3 deep dive — 5 questions with reasons+examples",
+          "done": false
+        },
+        {
+          "id": "task-18-6",
+          "text": "Anki: 10 new high-level collocations",
+          "done": false
+        }
+      ]
+    },
+    {
+      "dayNumber": 19,
+      "phase": 4,
+      "title": "Wednesday (2.5 hrs)",
+      "tasks": [
+        {
+          "id": "task-19-1",
+          "text": "[BBC 6 Minute English](https://www.bbc.co.uk/learningenglish/english/features/6-minute-english) (15min)",
+          "done": false
+        },
+        {
+          "id": "task-19-2",
+          "text": "Reading: Full test on [ieltsolve.com](https://www.ieltsolve.com/) (Cambridge 18 Test 1, 60min)",
+          "done": false
+        },
+        {
+          "id": "task-19-3",
+          "text": "Practice 18-min per passage speed drill (Band 8 technique)",
+          "done": false
+        },
+        {
+          "id": "task-19-4",
+          "text": "1 [TED Talk](https://www.ted.com/talks) at 1.25x speed (15min) — take notes",
+          "done": false
+        },
+        {
+          "id": "task-19-5",
+          "text": "Review error log in **PrepSprint Notebook** (10min)",
+          "done": false
+        }
+      ]
+    },
+    {
+      "dayNumber": 20,
+      "phase": 4,
+      "title": "Thursday (2.5 hrs)",
+      "tasks": [
+        {
+          "id": "task-20-1",
+          "text": "[BBC 6 Minute English](https://www.bbc.co.uk/learningenglish/english/features/6-minute-english) (15min)",
+          "done": false
+        },
+        {
+          "id": "task-20-2",
+          "text": "WRITING: Task 1 + Task 2 (timed, 60min total) from [ielts-up.com](https://ielts-up.com/writing/ielts-writing-practice.html)",
+          "done": false
+        },
+        {
+          "id": "task-20-3",
+          "text": "Spend FIRST 5 minutes PLANNING (Band 8 habit)",
+          "done": false
+        },
+        {
+          "id": "task-20-4",
+          "text": "AI feedback via [engnovate.com](https://engnovate.com/) — check Coherence & Cohesion specifically",
+          "done": false
+        },
+        {
+          "id": "task-20-5",
+          "text": "Speaking: Full test recording (15min) using [ieltstestsimulation.com](https://www.ieltstestsimulation.com/wb-cnt/speaking/overview/)",
+          "done": false
+        },
+        {
+          "id": "task-20-6",
+          "text": "Listen back — check answer length, examples, natural flow",
+          "done": false
+        }
+      ]
+    },
+    {
+      "dayNumber": 21,
+      "phase": 4,
+      "title": "Friday (2.5 hrs)",
+      "tasks": [
+        {
+          "id": "task-21-1",
+          "text": "[BBC 6 Minute English](https://www.bbc.co.uk/learningenglish/english/features/6-minute-english) (15min)",
+          "done": false
+        },
+        {
+          "id": "task-21-2",
+          "text": "LIGHT DAY:",
+          "done": false
+        },
+        {
+          "id": "task-21-3",
+          "text": "1 Listening test on [ieltsolve.com](https://www.ieltsolve.com/) (Cambridge 18 Test 2, 30min)",
+          "done": false
+        },
+        {
+          "id": "task-21-4",
+          "text": "1 Reading test on [ieltsolve.com](https://www.ieltsolve.com/) (Cambridge 18 Test 2, 60min) — target 32+/40",
+          "done": false
+        },
+        {
+          "id": "task-21-5",
+          "text": "Watch [IELTS Speaking band 7+ sample](https://www.youtube.com/@IELTSbyIDP) (20min)",
+          "done": false
+        },
+        {
+          "id": "task-21-6",
+          "text": "No new material — consolidation only",
+          "done": false
+        }
+      ]
+    },
+    {
+      "dayNumber": 22,
+      "phase": 4,
+      "title": "Saturday (6–8 hrs) — FULL MOCK #4 (PENULTIMATE)",
+      "tasks": [
+        {
+          "id": "task-22-1",
+          "text": "**FULL MOCK TEST #4** on [ieltsonlinetests.com](https://ieltsonlinetests.com/ielts-exam-library) (Cambridge 19 Test 1, timed, 2h45min)",
+          "done": false
+        },
+        {
+          "id": "task-22-2",
+          "text": "30min break",
+          "done": false
+        },
+        {
+          "id": "task-22-3",
+          "text": "EXHAUSTIVE REVIEW (3 hours):",
+          "done": false
+        },
+        {
+          "id": "task-22-4",
+          "text": "Identify 1–2 things to fix in remaining 2 days",
+          "done": false
+        },
+        {
+          "id": "task-22-5",
+          "text": "Prepare test day logistics:",
+          "done": false
+        }
+      ]
+    },
+    {
+      "dayNumber": 23,
+      "phase": 4,
+      "title": "Sunday (5–6 hrs) — FINAL DEEP WORK",
+      "tasks": [
+        {
+          "id": "task-23-1",
+          "text": "LAST INTENSIVE SESSION:",
+          "done": false
+        },
+        {
+          "id": "task-23-2",
+          "text": "REVIEW everything — focus on NOT repeating the same errors",
+          "done": false
+        },
+        {
+          "id": "task-23-3",
+          "text": "Create \"Test Day Checklist\" in **PrepSprint Notebook**",
+          "done": false
+        },
+        {
+          "id": "task-23-4",
+          "text": "Finalize One-Page Cheat Sheet: YOUR top 5 mistakes + fixes",
+          "done": false
+        },
+        {
+          "id": "task-23-5",
+          "text": "Watch [IELTS by IDP \"Test Day Tips\"](https://www.youtube.com/@IELTSbyIDP) (15min)",
+          "done": false
+        },
+        {
+          "id": "task-23-6",
+          "text": "Pack your bag. SLEEP EARLY.",
+          "done": false
+        }
+      ]
+    },
+    {
+      "dayNumber": 24,
+      "phase": 4,
+      "title": "Monday (light — 1 hr max)",
+      "tasks": [
+        {
+          "id": "task-24-1",
+          "text": "**ABSOLUTELY NO HARD STUDY**",
+          "done": false
+        },
+        {
+          "id": "task-24-2",
+          "text": "Review One-Page Cheat Sheet in **PrepSprint Notebook** (10min)",
+          "done": false
+        },
+        {
+          "id": "task-24-3",
+          "text": "Listen to [BBC 6 Minute English](https://www.bbc.co.uk/learningenglish/english/features/6-minute-english) (15min) — relaxed",
+          "done": false
+        },
+        {
+          "id": "task-24-4",
+          "text": "Read through Writing Fix List (10min)",
+          "done": false
+        },
+        {
+          "id": "task-24-5",
+          "text": "Review Speaking Part 1&2 topics from [ieltsliz.com](https://ieltsliz.com/ielts-speaking-topics-2026/) (15min)",
+          "done": false
+        },
+        {
+          "id": "task-24-6",
+          "text": "Relax. Trust your preparation. Sleep 8+ hours.",
+          "done": false
+        }
+      ]
+    }
+  ]
+}

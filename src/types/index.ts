@@ -35,6 +35,25 @@ export interface NoteEntry {
   updatedAt: string;
 }
 
+export interface StudyTask {
+  id: string;
+  text: string;
+  done: boolean;
+}
+
+export interface StudyDay {
+  dayNumber: number;
+  phase: number;
+  title: string;
+  tasks: StudyTask[];
+}
+
+export interface StudyPlan {
+  version: number;
+  name: string;
+  days: StudyDay[];
+}
+
 export interface AppState {
   targetDate: string | null;
   entries: TestEntry[];
