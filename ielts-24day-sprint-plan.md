@@ -106,13 +106,13 @@ From [r/IELTS](https://reddit.com/r/IELTS), [CanadaVisa forums](https://www.cana
 - [ ] **Log results in PrepSprint** `+ Add test result` → fill test name, type, score, notes
 - [ ] Identify your weakest section → this gets 50% of study time going forward
 - [ ] Set up Anki with an IELTS vocabulary deck from [ankiweb.net](https://apps.ankiweb.net/)
-- [ ] Set up an error log in **PrepSprint Notebook** (or Notion) — date, error type, correct answer, pattern
+- [ ] PrepSprint now has a built-in **Error Log** — after each entry review, expand the card and log mistakes with categories (vocabulary, spelling, timing, etc.) and note the fix
 
 **Day 2 — Sunday (5–7 hrs)**
 
 - [ ] REVIEW mock test in detail — categorize EVERY wrong answer:
   - Was it vocabulary? Spelling? Timing? Misread question? Distracted?
-  - Update error log in **PrepSprint Notebook**
+  - Log each mistake in the entry's **Error Log** (expand card → Error Log → +Add error)
 - [ ] Watch [IELTS Liz "Writing Task 2 Introduction Formula"](https://www.youtube.com/@ieltsliz) on YouTube
 - [ ] Write 1 Task 2 essay (timed 40min) — use Liz's formula; log in **PrepSprint**
 - [ ] Run essay through [ChatGPT](https://chat.openai.com/) with this prompt:
@@ -126,7 +126,7 @@ From [r/IELTS](https://reddit.com/r/IELTS), [CanadaVisa forums](https://www.cana
 
 - [ ] [BBC 6 Minute English](https://www.bbc.co.uk/learningenglish/english/features/6-minute-english) (20min) — listen + read transcript
 - [ ] 1 full Listening test on [ieltsolve.com](https://www.ieltsolve.com/) (Cambridge 15 Test 2, 30min) — use **PrepSprint Focus Timer**
-- [ ] Review every wrong answer in Listening — add to error log in **PrepSprint Notebook**
+- [ ] Review every wrong answer in Listening — add to the entry's **Error Log** (category + what went wrong + fix)
 - [ ] Watch [Fastrack IELTS "Top 10 Listening Mistakes"](https://www.youtube.com/@FastrackIELTS) video
 - [ ] Anki vocabulary: 15 new words + review
 - [ ] Speaking Part 1 practice — record 5 answers on your phone, listen back
@@ -139,7 +139,7 @@ From [r/IELTS](https://reddit.com/r/IELTS), [CanadaVisa forums](https://www.cana
 
 - [ ] [BBC 6 Minute English](https://www.bbc.co.uk/learningenglish/english/features/6-minute-english) (20min)
 - [ ] Reading: 2 passages timed (20min each = 40min) from [ieltstestsimulation.com](https://www.ieltstestsimulation.com/) Cambridge 15
-- [ ] REVIEW both passages — add wrong answers to error log in **PrepSprint Notebook**
+- [ ] REVIEW both passages — add wrong answers to the entry's **Error Log**
 - [ ] Watch [IELTS Advantage "Reading: Matching Headings Strategy"](https://www.youtube.com/@Ieltsadvantage)
 - [ ] Anki: 15 new words
 - [ ] Speaking: Record Part 2 cue card (2min), listen back, identify improvements
@@ -163,7 +163,7 @@ From [r/IELTS](https://reddit.com/r/IELTS), [CanadaVisa forums](https://www.cana
 - [ ] REVIEW with audio script — underline missed answers
 - [ ] Watch [E2 IELTS "Listening: Map Labelling & Multiple Choice"](https://www.youtube.com/@E2IELTS)
 - [ ] Reading: 1 full test (60min) — [ieltstestsimulation.com](https://www.ieltstestsimulation.com/) Cambridge 16 Test 1
-- [ ] **Log tests in PrepSprint** — update error log
+- [ ] **Log tests in PrepSprint** — add errors to each entry's **Error Log**
 - [ ] Anki: review + 15 new words
 
 **Day 7 — Friday (2.5 hrs)**
@@ -186,7 +186,7 @@ From [r/IELTS](https://reddit.com/r/IELTS), [CanadaVisa forums](https://www.cana
   - Writing: self-assess vs Band 7 descriptors → identify gaps
   - Speaking: listen to your recording → note fluency gaps, repeated words
 - [ ] **Log everything in PrepSprint** — use per-type entry cards
-- [ ] Update error log → identify TOP 3 error patterns
+- [ ] Update **Error Log** for each section → identify TOP 3 error patterns
 - [ ] Watch YouTube on your #1 error pattern from the channels above
 - [ ] Create a "One-Page Cheat Sheet" in **PrepSprint Notebook** with your personal error patterns + fixes
 
@@ -208,7 +208,7 @@ From [r/IELTS](https://reddit.com/r/IELTS), [CanadaVisa forums](https://www.cana
 - [ ] FULL LISTENING TEST on [ieltsonlinetests.com](https://ieltsonlinetests.com/ielts-exam-library) (Cambridge 16 Test 3, 30min) — focus on Section 4
 - [ ] REVIEW Section 4 specifically — practice with [TED Talks](https://www.ted.com/talks) at 1.25x speed
 - [ ] Reading: 1 full test (60min) on [ieltstestsimulation.com](https://www.ieltstestsimulation.com/) — focus on Passage 3 timing (allow 25min)
-- [ ] **Log in PrepSprint** — update error log
+- [ ] **Log in PrepSprint** — add errors to the entry's **Error Log**
 - [ ] Anki: 15 new words + review all
 
 ---
@@ -230,7 +230,7 @@ From [r/IELTS](https://reddit.com/r/IELTS), [CanadaVisa forums](https://www.cana
 - [ ] LISTENING FOCUS: Section 4 only from 3 different tests on [ieltsolve.com](https://www.ieltsolve.com/) (Cambridge 16 Test 4, Cambridge 17 Tests 1–2)
 - [ ] Reading FOCUS: Matching Headings questions only (20 questions from 2 passages)
 - [ ] Watch [Fastrack IELTS "True/False/Not Given — The Complete Guide"](https://www.youtube.com/@FastrackIELTS)
-- [ ] Error log review in **PrepSprint Notebook** (10min — read through all errors from past 2 weeks)
+- [ ] Review **Error Log** across all entries (10min — expand each entry card and read through mistakes from past 2 weeks)
 
 **Day 13 — Thursday (2.5 hrs)**
 
@@ -245,7 +245,7 @@ From [r/IELTS](https://reddit.com/r/IELTS), [CanadaVisa forums](https://www.cana
 
 - [ ] [BBC 6 Minute English](https://www.bbc.co.uk/learningenglish/english/features/6-minute-english) (15min)
 - [ ] LIGHT REVIEW DAY:
-  - Read through error log in **PrepSprint Notebook** (15min)
+  - Read through **Error Log** entries across all tests (15min)
   - Review Writing Fix List (10min)
   - Review One-Page Cheat Sheet (5min)
 - [ ] 1 Listening test on [ieltsolve.com](https://www.ieltsolve.com/) (Cambridge 17 Test 1, 30min) — aim for 30+/40
@@ -310,7 +310,7 @@ From [r/IELTS](https://reddit.com/r/IELTS), [CanadaVisa forums](https://www.cana
 - [ ] Reading: Full test on [ieltsolve.com](https://www.ieltsolve.com/) (Cambridge 18 Test 1, 60min)
 - [ ] Practice 18-min per passage speed drill (Band 8 technique)
 - [ ] 1 [TED Talk](https://www.ted.com/talks) at 1.25x speed (15min) — take notes
-- [ ] Review error log in **PrepSprint Notebook** (10min)
+- [ ] Review **Error Log** across all entries (10min)
 
 **Day 20 — Thursday (2.5 hrs)**
 
@@ -327,7 +327,7 @@ From [r/IELTS](https://reddit.com/r/IELTS), [CanadaVisa forums](https://www.cana
 - [ ] LIGHT DAY:
   - Review One-Page Cheat Sheet in **PrepSprint Notebook** (10min)
   - Review Writing Fix List (10min)
-  - Read error log one more time (10min)
+  - Read through all **Error Log** entries one more time (10min)
 - [ ] 1 Listening test on [ieltsolve.com](https://www.ieltsolve.com/) (Cambridge 18 Test 2, 30min)
 - [ ] 1 Reading test on [ieltsolve.com](https://www.ieltsolve.com/) (Cambridge 18 Test 2, 60min) — target 32+/40
 - [ ] Watch [IELTS Speaking band 7+ sample](https://www.youtube.com/@IELTSbyIDP) (20min)
@@ -458,7 +458,7 @@ Get essays graded at [engnovate.com](https://engnovate.com/) or [ielts-gpt.com](
 
 1. **You don't need coaching.** Every resource above has a direct link and is free. Thousands from developing countries have proven this works.
 2. **Your biggest enemy is the "information trap"** — watching 50 YouTube videos but never practicing. Apply > consume. The plan above tells you exactly when to watch vs. when to do.
-3. **The review is GOLD.** 50% of your study time should be reviewing mistakes, not doing new tests. Your **PrepSprint Notebook** error log is your most valuable tool.
+ 3. **The review is GOLD.** 50% of your study time should be reviewing mistakes, not doing new tests. Your **PrepSprint Error Log** (on each entry card) is your most valuable tool — track every mistake with a category and fix.
 4. **Sleep is non-negotiable.** Cognitive performance drops 20%+ after poor sleep. This is especially important on Days 22–24.
 5. **Test day strategy:**
    - Skip hard questions, come back
