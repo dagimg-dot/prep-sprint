@@ -14,6 +14,14 @@ export const TEST_TYPE_LABELS: Record<TestType, string> = {
   speaking: "Speaking",
 };
 
+export interface ErrorLogEntry {
+  id: string;
+  questionType: string;
+  category: string;
+  mistake: string;
+  fix: string;
+}
+
 export interface TestEntry {
   id: string;
   testName: string;
@@ -26,6 +34,7 @@ export interface TestEntry {
   writingTask1?: string;
   writingTask2?: string;
   audioFileName?: string;
+  errorLog: ErrorLogEntry[];
 }
 
 export interface NoteEntry {
@@ -60,4 +69,7 @@ export interface AppState {
   setTargetDate: (date: string | null) => void;
   addEntry: (entry: TestEntry) => void;
   removeEntry: (id: string) => void;
+  addError: (entryId: string, error: ErrorLogEntry) => void;
+  removeError: (entryId: string, errorId: string) => void;
+  updateError: (entryId: string, error: ErrorLogEntry) => void;
 }
