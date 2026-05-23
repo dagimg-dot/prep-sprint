@@ -183,8 +183,12 @@ export function EntryCard({ entry, onDelete }: EntryCardProps) {
         <div className="flex items-start justify-between gap-4">
           <div className="min-w-0 flex-1 space-y-1.5">
             <div className="flex items-center gap-2">
-              <span className="text-muted-foreground">{dateLabel}</span>
-              <span className="truncate font-medium">{entry.testName}</span>
+              <span className="text-muted-foreground whitespace-nowrap">
+                {dateLabel}
+              </span>
+              <span className="truncate font-medium" title={entry.testName}>
+                {entry.testName}
+              </span>
               <Badge
                 variant="outline"
                 className={`text-xs font-normal ${typeColors[entry.testType] ?? ""}`}
@@ -192,9 +196,9 @@ export function EntryCard({ entry, onDelete }: EntryCardProps) {
                 {TEST_TYPE_LABELS[entry.testType]}
               </Badge>
             </div>
-            <div className="flex items-center gap-2">
+            <div className="flex items-center gap-2 flex-wrap">
               {entry.partScores && entry.partScores.length > 0 && (
-                <span className="flex flex-wrap gap-1">
+                <span className="flex gap-1">
                   {entry.partScores.map((ps) => (
                     <Badge
                       key={ps.label}
@@ -206,23 +210,28 @@ export function EntryCard({ entry, onDelete }: EntryCardProps) {
                   ))}
                 </span>
               )}
+              {entry.rawScore != null && (
+                <span className="text-xs text-muted-foreground tabular-nums">
+                  {entry.rawScore}
+                  {entry.rawMax != null ? `/${entry.rawMax}` : ""}
+                </span>
+              )}
+              {entry.testLink && !isWriting && (
+                <a
+                  href={entry.testLink}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-[10px] text-blue-400 hover:underline"
+                >
+                  link
+                </a>
+              )}
               {errorCount > 0 && (
                 <Badge variant="secondary" className="text-[10px]">
                   {errorCount} error{errorCount !== 1 ? "s" : ""}
                 </Badge>
               )}
             </div>
-
-            {entry.testLink && !isWriting && (
-              <a
-                href={entry.testLink}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="block truncate text-sm text-blue-400 hover:underline"
-              >
-                link
-              </a>
-            )}
 
             {isWriting && (
               <div className="space-y-2">
@@ -399,12 +408,6 @@ export function EntryCard({ entry, onDelete }: EntryCardProps) {
             <Badge className="text-base px-3 py-1" variant="default">
               {entry.score}
             </Badge>
-            {entry.rawScore != null && (
-              <span className="text-xs text-muted-foreground tabular-nums">
-                {entry.rawScore}
-                {entry.rawMax != null ? `/${entry.rawMax}` : ""}
-              </span>
-            )}
             <Button
               variant="ghost"
               size="sm"
