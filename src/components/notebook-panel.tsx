@@ -72,12 +72,20 @@ export function NotebookPanel() {
 
   useEffect(() => {
     const handler = (e: KeyboardEvent) => {
-      if ((e.ctrlKey || e.metaKey) && e.shiftKey && (e.key === "E" || e.key === "e")) {
+      if (
+        (e.ctrlKey || e.metaKey) &&
+        e.shiftKey &&
+        (e.key === "E" || e.key === "e")
+      ) {
         e.preventDefault();
         setReadMode((r) => !r);
       }
       if (e.key === "Escape") closeZen();
-      if ((e.ctrlKey || e.metaKey) && e.shiftKey && (e.key === "Z" || e.key === "z")) {
+      if (
+        (e.ctrlKey || e.metaKey) &&
+        e.shiftKey &&
+        (e.key === "Z" || e.key === "z")
+      ) {
         e.preventDefault();
         if (zenOpen) closeZen();
         else openZen();
@@ -130,7 +138,10 @@ export function NotebookPanel() {
   useEffect(() => {
     if (!zenOpen) return;
     const handler = (e: MouseEvent) => {
-      if (zenContentRef.current && !zenContentRef.current.contains(e.target as Node)) {
+      if (
+        zenContentRef.current &&
+        !zenContentRef.current.contains(e.target as Node)
+      ) {
         closeZen();
       }
     };
@@ -140,175 +151,176 @@ export function NotebookPanel() {
 
   return (
     <>
-    <Card ref={cardRef} className="flex flex-col rounded-md">
-      <CardHeader
-        ref={headerRef}
-        className="flex-row items-center justify-between space-y-0 py-2 shrink-0"
-      >
-        <CardTitle className="text-base">Notebook</CardTitle>
-        <div className="flex items-center gap-1">
-          <Button variant="outline" size="sm" onClick={handleNew}>
-            + New
-          </Button>
-          <Button
-            variant="outline"
-            size="sm"
-            onClick={togglePanel}
-            title={panelCollapsed ? "Expand notebook" : "Collapse notebook"}
-          >
-            {panelCollapsed ? "\u2193" : "\u2191"}
-          </Button>
-        </div>
-      </CardHeader>
-      <div
-        className={`transition-all duration-300 ease-in-out ${
-          panelCollapsed ? "max-h-0 opacity-0" : "opacity-100"
-        }`}
-        style={panelCollapsed ? { overflow: "hidden" } : undefined}
-      >
-        <div
-          className="overflow-y-auto scrollbar-none"
-          style={contentMaxH !== null ? { maxHeight: contentMaxH } : undefined}
+      <Card ref={cardRef} className="flex flex-col rounded-md">
+        <CardHeader
+          ref={headerRef}
+          className="flex-row items-center justify-between space-y-0 py-2 shrink-0"
         >
-          <CardContent className="flex flex-col gap-3 pt-0">
-            {noteList.length > 0 && (
-              <div className="flex gap-1 flex-wrap">
-                {noteList.map((n) => (
-                  <button
-                    key={n.id}
-                    type="button"
-                    onClick={() => setActiveNote(n.id)}
-                    className={`text-xs px-2 py-1 rounded-md border transition-colors ${
-                      n.id === activeNoteId
-                        ? "border-primary bg-primary/10 text-foreground"
-                        : "border-border text-muted-foreground hover:text-foreground"
-                    }`}
-                  >
-                    {n.title}
-                  </button>
-                ))}
-              </div>
-            )}
-            {activeNote ? (
-              <>
-                <div className="flex items-center gap-2">
-                  {readMode ? (
-                    <span className="flex-1 text-sm font-medium px-1">
-                      {title}
-                    </span>
-                  ) : (
-                    <input
-                      type="text"
-                      value={title}
-                      onChange={(e) => handleTitleChange(e.target.value)}
-                      placeholder="Note title"
-                      className="flex-1 bg-transparent border-b border-border px-1 py-0.5 text-sm font-medium outline-none focus:border-primary"
-                    />
-                  )}
-                  <button
-                    type="button"
-                    onClick={() => setReadMode(!readMode)}
-                    className="text-xs text-muted-foreground hover:text-foreground underline underline-offset-2 shrink-0"
-                    title={`${readMode ? "Edit" : "Read"} (Ctrl+Shift+E)`}
-                  >
-                    {readMode ? "Edit" : "Read"}
-                  </button>
-                  <button
-                    type="button"
-                    onClick={openZen}
-                    className="text-xs text-muted-foreground hover:text-foreground underline underline-offset-2 shrink-0"
-                    title="Zen view (Ctrl+Shift+Z)"
-                  >
-                    Zen
-                  </button>
-                  <Button
-                    variant="ghost"
-                    size="sm"
-                    className="text-muted-foreground hover:text-destructive shrink-0"
-                    onClick={handleDelete}
-                  >
-                    Delete
-                  </Button>
+          <CardTitle className="text-base">Notebook</CardTitle>
+          <div className="flex items-center gap-1">
+            <Button variant="outline" size="sm" onClick={handleNew}>
+              + New
+            </Button>
+            <Button
+              variant="outline"
+              size="sm"
+              onClick={togglePanel}
+              title={panelCollapsed ? "Expand notebook" : "Collapse notebook"}
+            >
+              {panelCollapsed ? "\u2193" : "\u2191"}
+            </Button>
+          </div>
+        </CardHeader>
+        <div
+          className={`transition-all duration-300 ease-in-out ${
+            panelCollapsed ? "max-h-0 opacity-0" : "opacity-100"
+          }`}
+          style={panelCollapsed ? { overflow: "hidden" } : undefined}
+        >
+          <div
+            className="overflow-y-auto scrollbar-none"
+            style={
+              contentMaxH !== null ? { maxHeight: contentMaxH } : undefined
+            }
+          >
+            <CardContent className="flex flex-col gap-3 pt-0">
+              {noteList.length > 0 && (
+                <div className="flex gap-1 flex-wrap">
+                  {noteList.map((n) => (
+                    <button
+                      key={n.id}
+                      type="button"
+                      onClick={() => setActiveNote(n.id)}
+                      className={`text-xs px-2 py-1 rounded-md border transition-colors ${
+                        n.id === activeNoteId
+                          ? "border-primary bg-primary/10 text-foreground"
+                          : "border-border text-muted-foreground hover:text-foreground"
+                      }`}
+                    >
+                      {n.title}
+                    </button>
+                  ))}
                 </div>
-
-                {readMode ? (
-                  <div className="prose prose-sm prose-invert max-w-none flex-1 overflow-auto rounded-md border bg-background p-4">
-                    <Markdown remarkPlugins={[remarkGfm]}>
-                      {body || "*Empty*"}
-                    </Markdown>
-                  </div>
-                ) : (
-                  <>
-                    <textarea
-                      ref={textareaRef}
-                      value={body}
-                      onChange={(e) => handleBodyChange(e.target.value)}
-                      onKeyDown={(e) => {
-                        if (e.key === "Tab") {
-                          e.preventDefault();
-                          const ta = e.currentTarget;
-                          const start = ta.selectionStart;
-                          const end = ta.selectionEnd;
-                          const next =
-                            body.slice(0, start) + "  " + body.slice(end);
-                          setBody(next);
-                          requestAnimationFrame(() => {
-                            ta.selectionStart = ta.selectionEnd = start + 2;
-                          });
-                          clearTimeout(debounceRef.current);
-                          debounceRef.current = setTimeout(
-                            () => save(title, next),
-                            300,
-                          );
-                        }
-                      }}
-                      placeholder="Write in markdown..."
-                      className="w-full resize-none scrollbar-none rounded-md border border-input bg-background p-3 text-sm outline-none focus:border-primary min-h-[120px]"
-                    />
-
-                    <div className="flex items-center gap-2">
-                      <button
-                        type="button"
-                        onClick={() => setPreview(!preview)}
-                        className="text-xs text-muted-foreground hover:text-foreground underline underline-offset-2"
-                      >
-                        {preview ? "Hide preview" : "Show preview"}
-                      </button>
-                      {!preview && (
-                        <span className="text-[10px] text-muted-foreground">
-                          (auto-saves)
-                        </span>
-                      )}
-                    </div>
-
-                    {preview && (
-                      <div className="prose prose-sm prose-invert max-w-none rounded-md border bg-background p-3 overflow-auto max-h-80">
-                        <Markdown remarkPlugins={[remarkGfm]}>
-                          {body || "*Empty*"}
-                        </Markdown>
-                      </div>
+              )}
+              {activeNote ? (
+                <>
+                  <div className="flex items-center gap-2">
+                    {readMode ? (
+                      <span className="flex-1 text-sm font-medium px-1">
+                        {title}
+                      </span>
+                    ) : (
+                      <input
+                        type="text"
+                        value={title}
+                        onChange={(e) => handleTitleChange(e.target.value)}
+                        placeholder="Note title"
+                        className="flex-1 bg-transparent border-b border-border px-1 py-0.5 text-sm font-medium outline-none focus:border-primary"
+                      />
                     )}
-                  </>
-                )}
-              </>
-            ) : (
-              <div className="flex-1 flex items-center justify-center">
-                <p className="text-sm text-muted-foreground">
-                  No notes yet.{" "}
-                  <button
-                    type="button"
-                    onClick={handleNew}
-                    className="underline underline-offset-2 hover:text-foreground"
-                  >
-                    Create one
-                  </button>
-                </p>
-              </div>
-            )}
-          </CardContent>
+                    <button
+                      type="button"
+                      onClick={() => setReadMode(!readMode)}
+                      className="text-xs text-muted-foreground hover:text-foreground underline underline-offset-2 shrink-0"
+                      title={`${readMode ? "Edit" : "Read"} (Ctrl+Shift+E)`}
+                    >
+                      {readMode ? "Edit" : "Read"}
+                    </button>
+                    <button
+                      type="button"
+                      onClick={openZen}
+                      className="text-xs text-muted-foreground hover:text-foreground underline underline-offset-2 shrink-0"
+                      title="Zen view (Ctrl+Shift+Z)"
+                    >
+                      Zen
+                    </button>
+                    <Button
+                      variant="ghost"
+                      size="sm"
+                      className="text-muted-foreground hover:text-destructive shrink-0"
+                      onClick={handleDelete}
+                    >
+                      Delete
+                    </Button>
+                  </div>
+
+                  {readMode ? (
+                    <div className="prose prose-sm prose-invert max-w-none flex-1 overflow-auto rounded-md border bg-background p-4">
+                      <Markdown remarkPlugins={[remarkGfm]}>
+                        {body || "*Empty*"}
+                      </Markdown>
+                    </div>
+                  ) : (
+                    <>
+                      <textarea
+                        ref={textareaRef}
+                        value={body}
+                        onChange={(e) => handleBodyChange(e.target.value)}
+                        onKeyDown={(e) => {
+                          if (e.key === "Tab") {
+                            e.preventDefault();
+                            const ta = e.currentTarget;
+                            const start = ta.selectionStart;
+                            const end = ta.selectionEnd;
+                            const next = `${body.slice(0, start)}  ${body.slice(end)}`;
+                            setBody(next);
+                            requestAnimationFrame(() => {
+                              ta.selectionStart = ta.selectionEnd = start + 2;
+                            });
+                            clearTimeout(debounceRef.current);
+                            debounceRef.current = setTimeout(
+                              () => save(title, next),
+                              300,
+                            );
+                          }
+                        }}
+                        placeholder="Write in markdown..."
+                        className="w-full resize-none scrollbar-none rounded-md border border-input bg-background p-3 text-sm outline-none focus:border-primary min-h-[120px]"
+                      />
+
+                      <div className="flex items-center gap-2">
+                        <button
+                          type="button"
+                          onClick={() => setPreview(!preview)}
+                          className="text-xs text-muted-foreground hover:text-foreground underline underline-offset-2"
+                        >
+                          {preview ? "Hide preview" : "Show preview"}
+                        </button>
+                        {!preview && (
+                          <span className="text-[10px] text-muted-foreground">
+                            (auto-saves)
+                          </span>
+                        )}
+                      </div>
+
+                      {preview && (
+                        <div className="prose prose-sm prose-invert max-w-none rounded-md border bg-background p-3 overflow-auto max-h-80">
+                          <Markdown remarkPlugins={[remarkGfm]}>
+                            {body || "*Empty*"}
+                          </Markdown>
+                        </div>
+                      )}
+                    </>
+                  )}
+                </>
+              ) : (
+                <div className="flex-1 flex items-center justify-center">
+                  <p className="text-sm text-muted-foreground">
+                    No notes yet.{" "}
+                    <button
+                      type="button"
+                      onClick={handleNew}
+                      className="underline underline-offset-2 hover:text-foreground"
+                    >
+                      Create one
+                    </button>
+                  </p>
+                </div>
+              )}
+            </CardContent>
+          </div>
         </div>
-      </div>
-    </Card>
+      </Card>
 
       {zenOpen && activeNote && (
         <div
@@ -321,15 +333,15 @@ export function NotebookPanel() {
           <div
             ref={zenContentRef}
             className={`relative w-full max-w-3xl mx-4 max-h-[85vh] overflow-y-auto rounded-xl border bg-card p-8 shadow-2xl transition-all duration-200 ease-out ${
-              zenVisible
-                ? "opacity-100 scale-100"
-                : "opacity-0 scale-95"
+              zenVisible ? "opacity-100 scale-100" : "opacity-0 scale-95"
             }`}
           >
             <button
               type="button"
               onClick={closeZen}
-              onKeyDown={(e) => { if (e.key === "Enter" || e.key === " ") closeZen(); }}
+              onKeyDown={(e) => {
+                if (e.key === "Enter" || e.key === " ") closeZen();
+              }}
               className="absolute top-3 right-3 text-muted-foreground hover:text-foreground text-lg leading-none w-8 h-8 flex items-center justify-center rounded-full hover:bg-muted transition-colors"
               aria-label="Close zen view"
             >
