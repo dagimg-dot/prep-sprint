@@ -14,13 +14,13 @@ import { Separator } from "@/components/ui/separator";
 import { Textarea } from "@/components/ui/textarea";
 import { useStore } from "@/store/use-store";
 import {
-  type ErrorLogEntry,
   ERROR_CATEGORIES,
+  type ErrorLogEntry,
   QUESTION_TYPES,
+  TEST_TYPE_LABELS,
   type TestEntry,
   type TestType,
 } from "@/types";
-import { TEST_TYPE_LABELS } from "@/types";
 
 interface EntryCardProps {
   entry: TestEntry;
@@ -388,7 +388,8 @@ export function EntryCard({ entry, onDelete }: EntryCardProps) {
             </Badge>
             {entry.rawScore != null && (
               <span className="text-xs text-muted-foreground tabular-nums">
-                {entry.rawScore}{entry.rawMax != null ? `/${entry.rawMax}` : ""}
+                {entry.rawScore}
+                {entry.rawMax != null ? `/${entry.rawMax}` : ""}
               </span>
             )}
             {entry.partScores && entry.partScores.length > 0 && (
