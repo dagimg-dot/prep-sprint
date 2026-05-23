@@ -91,6 +91,21 @@ export function AddEntryForm() {
 
   const copyErrorLog = () => {
     const payload: Record<string, unknown> = {
+      testName: testName.trim() || undefined,
+      testType,
+      bandScore: score ? parseFloat(score) : undefined,
+      rawScore: rawScore ? parseInt(rawScore, 10) : undefined,
+      partScores:
+        partScores.length > 0
+          ? partScores
+              .map((p) => ({
+                label: p.label,
+                score: parseInt(p.score, 10),
+                max: parseInt(p.max, 10),
+              }))
+              .filter((p) => !Number.isNaN(p.score))
+          : undefined,
+      testLink: testLink.trim() || undefined,
       errors: pendingErrors.map(({ questionType, category, mistake, fix }) => ({
         questionType,
         category,

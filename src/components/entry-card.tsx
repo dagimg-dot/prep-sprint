@@ -199,6 +199,12 @@ export function EntryCard({ entry, onDelete }: EntryCardProps) {
 
   const copyErrorLog = () => {
     const payload: Record<string, unknown> = {
+      testName: entry.testName,
+      testType: entry.testType,
+      bandScore: entry.score,
+      rawScore: entry.rawScore,
+      partScores: entry.partScores,
+      testLink: entry.testLink,
       errors: (entry.errorLog ?? []).map(
         ({ questionType, category, mistake, fix }: ErrorLogEntry) => ({
           questionType,
