@@ -433,6 +433,52 @@ export function EntryCard({ entry, onDelete }: EntryCardProps) {
                       <path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2" />
                     </svg>
                   </button>
+                  <button
+                    type="button"
+                    onClick={copyErrorLog}
+                    className="text-muted-foreground hover:text-foreground"
+                    aria-label={copied ? "Copied" : "Copy for agent"}
+                  >
+                    {copied ? (
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="12"
+                        height="12"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        strokeWidth="2"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        aria-hidden="true"
+                      >
+                        <path d="M20 6 9 17l-5-5" />
+                      </svg>
+                    ) : (
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="12"
+                        height="12"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        strokeWidth="2"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        aria-hidden="true"
+                      >
+                        <rect
+                          width="14"
+                          height="14"
+                          x="8"
+                          y="8"
+                          rx="2"
+                          ry="2"
+                        />
+                        <path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2" />
+                      </svg>
+                    )}
+                  </button>
                 </div>
               )}
             </div>
@@ -578,52 +624,6 @@ export function EntryCard({ entry, onDelete }: EntryCardProps) {
                             <path d="M18 6 6 18" />
                             <path d="m6 6 12 12" />
                           </svg>
-                        </button>
-                        <button
-                          type="button"
-                          onClick={copyErrorLog}
-                          className="text-muted-foreground hover:text-foreground"
-                          aria-label={copied ? "Copied" : "Copy for agent"}
-                        >
-                          {copied ? (
-                            <svg
-                              xmlns="http://www.w3.org/2000/svg"
-                              width="11"
-                              height="11"
-                              viewBox="0 0 24 24"
-                              fill="none"
-                              stroke="currentColor"
-                              strokeWidth="2"
-                              strokeLinecap="round"
-                              strokeLinejoin="round"
-                              aria-hidden="true"
-                            >
-                              <path d="M20 6 9 17l-5-5" />
-                            </svg>
-                          ) : (
-                            <svg
-                              xmlns="http://www.w3.org/2000/svg"
-                              width="11"
-                              height="11"
-                              viewBox="0 0 24 24"
-                              fill="none"
-                              stroke="currentColor"
-                              strokeWidth="2"
-                              strokeLinecap="round"
-                              strokeLinejoin="round"
-                              aria-hidden="true"
-                            >
-                              <rect
-                                width="14"
-                                height="14"
-                                x="8"
-                                y="8"
-                                rx="2"
-                                ry="2"
-                              />
-                              <path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2" />
-                            </svg>
-                          )}
                         </button>
                       </div>
                       <p className="text-xs text-foreground">{err.mistake}</p>
