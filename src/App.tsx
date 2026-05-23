@@ -1,6 +1,7 @@
 import { NavLink, Route, Routes } from "react-router-dom";
 import { DataActions } from "@/components/data-actions";
 import { Dashboard } from "@/pages/dashboard";
+import { Plan } from "@/pages/plan";
 import { Stats } from "@/pages/stats";
 
 function Layout({ children }: { children: React.ReactNode }) {
@@ -26,6 +27,16 @@ function Layout({ children }: { children: React.ReactNode }) {
               }
             >
               Dashboard
+            </NavLink>
+            <NavLink
+              to="/plan"
+              className={({ isActive }) =>
+                isActive
+                  ? "font-medium text-foreground"
+                  : "text-muted-foreground hover:text-foreground"
+              }
+            >
+              Plan
             </NavLink>
             <NavLink
               to="/stats"
@@ -68,6 +79,7 @@ export default function App() {
     <Layout>
       <Routes>
         <Route path="/" element={<Dashboard />} />
+        <Route path="/plan" element={<Plan />} />
         <Route path="/stats" element={<Stats />} />
       </Routes>
     </Layout>
