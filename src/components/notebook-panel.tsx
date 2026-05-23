@@ -60,6 +60,17 @@ export function NotebookPanel() {
     return () => clearTimeout(debounceRef.current);
   }, []);
 
+  useEffect(() => {
+    const handler = (e: KeyboardEvent) => {
+      if ((e.ctrlKey || e.metaKey) && e.shiftKey && (e.key === "E" || e.key === "e")) {
+        e.preventDefault();
+        setReadMode((r) => !r);
+      }
+    };
+    window.addEventListener("keydown", handler);
+    return () => window.removeEventListener("keydown", handler);
+  }, []);
+
   const handleNew = () => {
     if (panelCollapsed) togglePanel();
     createNote();
@@ -169,6 +180,7 @@ export function NotebookPanel() {
                     type="button"
                     onClick={() => setReadMode(!readMode)}
                     className="text-xs text-muted-foreground hover:text-foreground underline underline-offset-2 shrink-0"
+                    title={`${readMode ? "Edit" : "Read"} (Ctrl+Shift+E)`}
                   >
                     {readMode ? "Edit" : "Read"}
                   </button>
