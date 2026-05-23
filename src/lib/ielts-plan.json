@@ -49,7 +49,7 @@
         },
         {
           "id": "task-1-9",
-          "text": "Set up an error log in **PrepSprint Notebook** (or Notion) — date, error type, correct answer, pattern",
+          "text": "PrepSprint now has a built-in **Error Log** — after each entry review, expand the card and log mistakes with categories (vocabulary, spelling, timing, etc.) and note the fix",
           "done": false
         }
       ]
@@ -118,7 +118,7 @@
         },
         {
           "id": "task-3-3",
-          "text": "Review every wrong answer in Listening — add to error log in **PrepSprint Notebook**",
+          "text": "Review every wrong answer in Listening — add to the entry's **Error Log** (category + what went wrong + fix)",
           "done": false
         },
         {
@@ -155,7 +155,7 @@
         },
         {
           "id": "task-4-3",
-          "text": "REVIEW both passages — add wrong answers to error log in **PrepSprint Notebook**",
+          "text": "REVIEW both passages — add wrong answers to the entry's **Error Log**",
           "done": false
         },
         {
@@ -244,7 +244,7 @@
         },
         {
           "id": "task-6-6",
-          "text": "**Log tests in PrepSprint** — update error log",
+          "text": "**Log tests in PrepSprint** — add errors to each entry's **Error Log**",
           "done": false
         },
         {
@@ -318,7 +318,7 @@
         },
         {
           "id": "task-8-5",
-          "text": "Update error log → identify TOP 3 error patterns",
+          "text": "Update **Error Log** for each section → identify TOP 3 error patterns",
           "done": false
         },
         {
@@ -397,7 +397,7 @@
         },
         {
           "id": "task-10-5",
-          "text": "**Log in PrepSprint** — update error log",
+          "text": "**Log in PrepSprint** — add errors to the entry's **Error Log**",
           "done": false
         },
         {
@@ -471,7 +471,7 @@
         },
         {
           "id": "task-12-5",
-          "text": "Error log review in **PrepSprint Notebook** (10min — read through all errors from past 2 weeks)",
+          "text": "Review **Error Log** across all entries (10min — expand each entry card and read through mistakes from past 2 weeks)",
           "done": false
         }
       ]
@@ -715,7 +715,7 @@
         },
         {
           "id": "task-19-5",
-          "text": "Review error log in **PrepSprint Notebook** (10min)",
+          "text": "Review **Error Log** across all entries (10min)",
           "done": false
         }
       ]
