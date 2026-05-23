@@ -220,7 +220,7 @@ export function EntryCard({ entry, onDelete }: EntryCardProps) {
                 rel="noopener noreferrer"
                 className="block truncate text-sm text-blue-400 hover:underline"
               >
-                {entry.testLink}
+                link
               </a>
             )}
 
