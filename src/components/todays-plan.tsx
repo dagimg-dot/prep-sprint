@@ -114,7 +114,7 @@ export function TodaysPlan() {
     return (
       <Card>
         <CardHeader>
-          <CardTitle className="text-base">Today&apos;s Plan</CardTitle>
+          <CardTitle className="text-base">Today's Plan</CardTitle>
         </CardHeader>
         <CardContent>
           <p className="text-sm text-muted-foreground">
@@ -129,11 +129,11 @@ export function TodaysPlan() {
     return (
       <Card>
         <CardHeader>
-          <CardTitle className="text-base">Today&apos;s Plan</CardTitle>
+          <CardTitle className="text-base">Today's Plan</CardTitle>
         </CardHeader>
         <CardContent>
           <p className="text-sm text-muted-foreground">
-            Set your exam date to see today&apos;s plan.
+            Set your exam date to see today's plan.
           </p>
         </CardContent>
       </Card>
@@ -145,7 +145,7 @@ export function TodaysPlan() {
     return (
       <Card>
         <CardHeader>
-          <CardTitle className="text-base">Today&apos;s Plan</CardTitle>
+          <CardTitle className="text-base">Today's Plan</CardTitle>
         </CardHeader>
         <CardContent>
           <p className="text-sm text-muted-foreground">
@@ -164,7 +164,7 @@ export function TodaysPlan() {
       <CardHeader className="pb-3">
         <div className="flex items-center justify-between">
           <CardTitle className="text-base">
-            {isToday ? "Today&apos;s Plan" : `Day ${viewingDay}`}
+            {isToday ? "Today's Plan" : `Day ${viewingDay}`}
           </CardTitle>
           <div className="flex items-center gap-2">
             {isToday && <Badge variant="secondary">Today</Badge>}
