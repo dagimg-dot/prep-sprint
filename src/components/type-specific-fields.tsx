@@ -3,6 +3,12 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import type { TestType } from "@/types";
 
+interface PartScoreInput {
+  label: string;
+  score: string;
+  max: string;
+}
+
 interface TypeSpecificFieldsProps {
   testType: TestType;
   testLink: string;
@@ -13,6 +19,10 @@ interface TypeSpecificFieldsProps {
   onWritingTask1Change: (v: string) => void;
   onWritingTask2Change: (v: string) => void;
   onAudioFileChange: (name: string) => void;
+  rawScore?: string;
+  onRawScoreChange?: (v: string) => void;
+  partScores?: PartScoreInput[];
+  onPartScoresChange?: (scores: PartScoreInput[]) => void;
 }
 
 export function TypeSpecificFields(props: TypeSpecificFieldsProps) {
@@ -27,14 +37,70 @@ export function TypeSpecificFields(props: TypeSpecificFieldsProps) {
   }
 }
 
-function LinkFields({ testLink, onTestLinkChange }: TypeSpecificFieldsProps) {
+function LinkFields({
+  testLink,
+  onTestLinkChange,
+  rawScore,
+  onRawScoreChange,
+  partScores,
+  onPartScoresChange,
+}: TypeSpecificFieldsProps) {
   return (
-    <Input
-      placeholder="Test link (URL)"
-      type="url"
-      value={testLink}
-      onChange={(e) => onTestLinkChange(e.target.value)}
-    />
+    <div className="space-y-3">
+      <div className="flex items-end gap-2">
+        <div className="flex-1">
+          <p className="text-xs text-muted-foreground mb-1">Raw score</p>
+          <Input
+            placeholder="0"
+            type="number"
+            min="0"
+            max="40"
+            value={rawScore ?? ""}
+            onChange={(e) => onRawScoreChange?.(e.target.value)}
+          />
+        </div>
+        <span className="text-sm text-muted-foreground pb-2">/ 40</span>
+      </div>
+
+      {partScores && onPartScoresChange && partScores.length > 0 && (
+        <div className="space-y-2">
+          <p className="text-xs text-muted-foreground">Per-part breakdown</p>
+          <div className="grid grid-cols-2 gap-2">
+            {partScores.map((part, i) => (
+              <div key={part.label} className="flex items-end gap-1.5">
+                <div className="flex-1 min-w-0">
+                  <p className="text-[10px] text-muted-foreground mb-0.5 truncate">
+                    {part.label}
+                  </p>
+                  <Input
+                    placeholder="0"
+                    type="number"
+                    min="0"
+                    value={part.score}
+                    onChange={(e) => {
+                      const next = [...partScores];
+                      next[i] = { ...next[i], score: e.target.value };
+                      onPartScoresChange(next);
+                    }}
+                    className="h-7 text-xs"
+                  />
+                </div>
+                <span className="text-xs text-muted-foreground pb-1.5 shrink-0">
+                  / {part.max}
+                </span>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+
+      <Input
+        placeholder="Test link (URL)"
+        type="url"
+        value={testLink}
+        onChange={(e) => onTestLinkChange(e.target.value)}
+      />
+    </div>
   );
 }
 
