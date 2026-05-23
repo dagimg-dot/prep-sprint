@@ -185,14 +185,27 @@ export function EntryCard({ entry, onDelete }: EntryCardProps) {
             <div className="flex items-center gap-2">
               <span className="text-muted-foreground">{dateLabel}</span>
               <span className="truncate font-medium">{entry.testName}</span>
-            </div>
-            <div className="flex items-center gap-2">
               <Badge
                 variant="outline"
                 className={`text-xs font-normal ${typeColors[entry.testType] ?? ""}`}
               >
                 {TEST_TYPE_LABELS[entry.testType]}
               </Badge>
+            </div>
+            <div className="flex items-center gap-2">
+              {entry.partScores && entry.partScores.length > 0 && (
+                <span className="flex flex-wrap gap-1">
+                  {entry.partScores.map((ps) => (
+                    <Badge
+                      key={ps.label}
+                      variant="outline"
+                      className="text-[10px] font-normal"
+                    >
+                      {ps.label}: {ps.score}/{ps.max}
+                    </Badge>
+                  ))}
+                </span>
+              )}
               {errorCount > 0 && (
                 <Badge variant="secondary" className="text-[10px]">
                   {errorCount} error{errorCount !== 1 ? "s" : ""}
@@ -391,19 +404,6 @@ export function EntryCard({ entry, onDelete }: EntryCardProps) {
                 {entry.rawScore}
                 {entry.rawMax != null ? `/${entry.rawMax}` : ""}
               </span>
-            )}
-            {entry.partScores && entry.partScores.length > 0 && (
-              <div className="flex flex-wrap gap-1 justify-end">
-                {entry.partScores.map((ps) => (
-                  <Badge
-                    key={ps.label}
-                    variant="outline"
-                    className="text-[10px] font-normal"
-                  >
-                    {ps.label}: {ps.score}/{ps.max}
-                  </Badge>
-                ))}
-              </div>
             )}
             <Button
               variant="ghost"
