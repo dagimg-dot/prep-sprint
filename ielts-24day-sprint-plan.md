@@ -14,9 +14,10 @@ You built [PrepSprint](file:///home/jd/JDrive/Projects/TYPESCRIPT/prep-sprint) â
 |-------------|-------------|---------------------------|
 | **Focus Timer** | Countdown per section (Listening 30m, Reading 60m, Writing 60m, Speaking 14m) | Fire it up every time you start a timed section. Track if you're hitting the target durations. |
 | **Entry Log** | Add test results with scores, notes, links | Log EVERY mock test and section practice here. The `testLink` field lets you store the URL of the test you took. |
+| **Error Log** | Structured per-test error tracking (category, question type, mistake, fix) | After reviewing a test, log each error with its category, what went wrong, and how to fix it next time. Expand on any entry card to review patterns. |
 | **Stats Page** | Average/highest/lowest scores, per-type averages, trend chart | Review after each mock â€” watch the trend line go up. The per-type breakdown shows which section is dragging you down. |
 | **Streak Calendar** | Visual activity heatmap | Your motivation fuel. Don't break the chain. |
-| **Notebook** | Markdown notes with auto-save | Keep your error log, Writing Fix List, and One-Page Cheat Sheet here instead of Google Docs. Everything in one place. |
+| **Notebook** | Markdown notes with auto-save | Keep your Writing Fix List, One-Page Cheat Sheet, and study notes here instead of Google Docs. Everything in one place. |
 | **Exam Countdown** | Days remaining banner | Stares at you every time you open the app. Use it. |
 | **Import/Export** | JSON backup | Backup before every mock test so you can track progress across restores. |
 
