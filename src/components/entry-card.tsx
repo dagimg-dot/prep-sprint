@@ -344,11 +344,6 @@ export function EntryCard({ entry, onDelete }: EntryCardProps) {
                   link
                 </a>
               )}
-              {errorCount > 0 && (
-                <Badge variant="secondary" className="text-[10px]">
-                  {errorCount} error{errorCount !== 1 ? "s" : ""}
-                </Badge>
-              )}
               {editing ? (
                 <div className="flex items-center gap-1">
                   <Button
