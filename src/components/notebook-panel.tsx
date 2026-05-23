@@ -98,13 +98,13 @@ export function NotebookPanel() {
     return () => window.removeEventListener("resize", update);
   }, []);
 
-  // biome-ignore lint/correctness/useExhaustiveDependencies: need to re-run on body change to auto-grow textarea
+  // biome-ignore lint/correctness/useExhaustiveDependencies: readMode needed as dep to re-size on return from read mode
   useEffect(() => {
     const ta = textareaRef.current;
     if (!ta) return;
     ta.style.height = "auto";
     ta.style.height = `${ta.scrollHeight}px`;
-  }, [body]);
+  }, [body, readMode]);
 
   const noteList = [...notes].sort(
     (a, b) => new Date(b.updatedAt).getTime() - new Date(a.updatedAt).getTime(),
