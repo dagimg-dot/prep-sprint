@@ -90,15 +90,16 @@ export function AddEntryForm() {
   const [copied, setCopied] = useState(false);
 
   const copyErrorLog = () => {
-    const output = pendingErrors.map(
-      ({ questionType, category, mistake, fix }) => ({
+    const payload: Record<string, unknown> = {
+      errors: pendingErrors.map(({ questionType, category, mistake, fix }) => ({
         questionType,
         category,
         mistake,
         fix,
-      }),
-    );
-    navigator.clipboard.writeText(JSON.stringify(output, null, 2)).then(() => {
+      })),
+    };
+    if (notes.trim()) payload.notes = notes.trim();
+    navigator.clipboard.writeText(JSON.stringify(payload, null, 2)).then(() => {
       setCopied(true);
       setTimeout(() => setCopied(false), 2000);
     });

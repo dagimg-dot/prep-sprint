@@ -198,15 +198,18 @@ export function EntryCard({ entry, onDelete }: EntryCardProps) {
   };
 
   const copyErrorLog = () => {
-    const output = (entry.errorLog ?? []).map(
-      ({ questionType, category, mistake, fix }: ErrorLogEntry) => ({
-        questionType,
-        category,
-        mistake,
-        fix,
-      }),
-    );
-    navigator.clipboard.writeText(JSON.stringify(output, null, 2)).then(() => {
+    const payload: Record<string, unknown> = {
+      errors: (entry.errorLog ?? []).map(
+        ({ questionType, category, mistake, fix }: ErrorLogEntry) => ({
+          questionType,
+          category,
+          mistake,
+          fix,
+        }),
+      ),
+    };
+    if (entry.notes) payload.notes = entry.notes;
+    navigator.clipboard.writeText(JSON.stringify(payload, null, 2)).then(() => {
       setCopied(true);
       setTimeout(() => setCopied(false), 2000);
     });
