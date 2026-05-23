@@ -15,6 +15,11 @@ export const useStore = create<AppState>()(
           entries: [entry, ...state.entries],
         })),
 
+      updateEntry: (entry) =>
+        set((state) => ({
+          entries: state.entries.map((e) => (e.id === entry.id ? entry : e)),
+        })),
+
       removeEntry: (id) =>
         set((state) => ({
           entries: state.entries.filter((e) => e.id !== id),

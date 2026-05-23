@@ -161,6 +161,7 @@ export interface AppState {
   entries: TestEntry[];
   setTargetDate: (date: string | null) => void;
   addEntry: (entry: TestEntry) => void;
+  updateEntry: (entry: TestEntry) => void;
   removeEntry: (id: string) => void;
   addError: (entryId: string, error: ErrorLogEntry) => void;
   removeError: (entryId: string, errorId: string) => void;

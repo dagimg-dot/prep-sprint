@@ -3,6 +3,7 @@ import { useState } from "react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
+import { Input } from "@/components/ui/input";
 import {
   Select,
   SelectContent,
@@ -153,9 +154,43 @@ function AddErrorForm({
 export function EntryCard({ entry, onDelete }: EntryCardProps) {
   const addError = useStore((s) => s.addError);
   const removeError = useStore((s) => s.removeError);
+  const updateEntry = useStore((s) => s.updateEntry);
   const [showErrorForm, setShowErrorForm] = useState(false);
   const [errorLogOpen, setErrorLogOpen] = useState(false);
   const [copied, setCopied] = useState(false);
+  const [editing, setEditing] = useState(false);
+  const [editName, setEditName] = useState(entry.testName);
+  const [editScore, setEditScore] = useState(String(entry.score));
+  const [editRawScore, setEditRawScore] = useState(
+    entry.rawScore != null ? String(entry.rawScore) : "",
+  );
+  const [editTestLink, setEditTestLink] = useState(entry.testLink ?? "");
+  const [editNotes, setEditNotes] = useState(entry.notes);
+
+  const startEditing = () => {
+    setEditName(entry.testName);
+    setEditScore(String(entry.score));
+    setEditRawScore(entry.rawScore != null ? String(entry.rawScore) : "");
+    setEditTestLink(entry.testLink ?? "");
+    setEditNotes(entry.notes);
+    setEditing(true);
+  };
+
+  const saveEdit = () => {
+    updateEntry({
+      ...entry,
+      testName: editName.trim() || entry.testName,
+      score: parseFloat(editScore) || entry.score,
+      rawScore: editRawScore ? parseInt(editRawScore, 10) : undefined,
+      testLink: editTestLink.trim() || undefined,
+      notes: editNotes.trim(),
+    });
+    setEditing(false);
+  };
+
+  const cancelEdit = () => {
+    setEditing(false);
+  };
 
   const copyErrorLog = () => {
     const output = (entry.errorLog ?? []).map(
@@ -186,15 +221,36 @@ export function EntryCard({ entry, onDelete }: EntryCardProps) {
               <span className="text-muted-foreground whitespace-nowrap">
                 {dateLabel}
               </span>
-              <span className="truncate font-medium" title={entry.testName}>
-                {entry.testName}
-              </span>
-              <Badge
-                variant="outline"
-                className={`text-xs font-normal ${typeColors[entry.testType] ?? ""}`}
-              >
-                {TEST_TYPE_LABELS[entry.testType]}
-              </Badge>
+              {editing ? (
+                <div className="flex items-center gap-2 flex-1">
+                  <Input
+                    value={editName}
+                    onChange={(e) => setEditName(e.target.value)}
+                    className="h-7 text-xs flex-1 min-w-0"
+                  />
+                  <Input
+                    type="number"
+                    step="0.5"
+                    min="0"
+                    max="9"
+                    value={editScore}
+                    onChange={(e) => setEditScore(e.target.value)}
+                    className="h-7 text-xs w-16"
+                  />
+                </div>
+              ) : (
+                <>
+                  <span className="truncate font-medium" title={entry.testName}>
+                    {entry.testName}
+                  </span>
+                  <Badge
+                    variant="outline"
+                    className={`text-xs font-normal ${typeColors[entry.testType] ?? ""}`}
+                  >
+                    {TEST_TYPE_LABELS[entry.testType]}
+                  </Badge>
+                </>
+              )}
             </div>
             <div className="flex items-center gap-2 flex-wrap">
               {entry.partScores && entry.partScores.length > 0 && (
@@ -210,13 +266,33 @@ export function EntryCard({ entry, onDelete }: EntryCardProps) {
                   ))}
                 </span>
               )}
-              {entry.rawScore != null && (
-                <span className="text-xs text-muted-foreground tabular-nums">
-                  {entry.rawScore}
-                  {entry.rawMax != null ? `/${entry.rawMax}` : ""}
-                </span>
+              {editing ? (
+                <Input
+                  placeholder="Raw"
+                  type="number"
+                  min="0"
+                  max="40"
+                  value={editRawScore}
+                  onChange={(e) => setEditRawScore(e.target.value)}
+                  className="h-6 text-[10px] w-16"
+                />
+              ) : (
+                entry.rawScore != null && (
+                  <span className="text-xs text-muted-foreground tabular-nums">
+                    {entry.rawScore}
+                    {entry.rawMax != null ? `/${entry.rawMax}` : ""}
+                  </span>
+                )
               )}
-              {entry.testLink && !isWriting && (
+              {editing && (
+                <Input
+                  placeholder="Test link"
+                  value={editTestLink}
+                  onChange={(e) => setEditTestLink(e.target.value)}
+                  className="h-6 text-[10px] w-28"
+                />
+              )}
+              {!editing && entry.testLink && !isWriting && (
                 <a
                   href={entry.testLink}
                   target="_blank"
@@ -230,6 +306,88 @@ export function EntryCard({ entry, onDelete }: EntryCardProps) {
                 <Badge variant="secondary" className="text-[10px]">
                   {errorCount} error{errorCount !== 1 ? "s" : ""}
                 </Badge>
+              )}
+              {editing ? (
+                <div className="flex items-center gap-1">
+                  <Button
+                    size="sm"
+                    className="h-6 text-[10px] px-2"
+                    onClick={saveEdit}
+                    disabled={!editName.trim()}
+                  >
+                    Save
+                  </Button>
+                  <button
+                    type="button"
+                    onClick={cancelEdit}
+                    className="text-muted-foreground hover:text-foreground"
+                    aria-label="Cancel"
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="14"
+                      height="14"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      aria-hidden="true"
+                    >
+                      <path d="M18 6 6 18" />
+                      <path d="m6 6 12 12" />
+                    </svg>
+                  </button>
+                </div>
+              ) : (
+                <div className="flex items-center gap-1">
+                  <button
+                    type="button"
+                    onClick={startEditing}
+                    className="text-muted-foreground hover:text-foreground"
+                    aria-label="Edit entry"
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="11"
+                      height="11"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      aria-hidden="true"
+                    >
+                      <path d="M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z" />
+                      <path d="m15 5 4 4" />
+                    </svg>
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => onDelete(entry.id)}
+                    className="text-muted-foreground hover:text-destructive"
+                    aria-label="Delete entry"
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="11"
+                      height="11"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      aria-hidden="true"
+                    >
+                      <path d="M3 6h18" />
+                      <path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6" />
+                      <path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2" />
+                    </svg>
+                  </button>
+                </div>
               )}
             </div>
 
@@ -281,13 +439,26 @@ export function EntryCard({ entry, onDelete }: EntryCardProps) {
               </div>
             )}
 
-            {entry.notes && (
+            {editing ? (
               <>
                 <Separator className="my-2" />
-                <p className="text-sm text-muted-foreground whitespace-pre-wrap">
-                  {entry.notes}
-                </p>
+                <Textarea
+                  placeholder="What I learned / shortcomings..."
+                  value={editNotes}
+                  onChange={(e) => setEditNotes(e.target.value)}
+                  rows={3}
+                  className="text-sm"
+                />
               </>
+            ) : (
+              entry.notes && (
+                <>
+                  <Separator className="my-2" />
+                  <p className="text-sm text-muted-foreground whitespace-pre-wrap">
+                    {entry.notes}
+                  </p>
+                </>
+              )
             )}
 
             <Separator className="my-2" />
@@ -408,14 +579,6 @@ export function EntryCard({ entry, onDelete }: EntryCardProps) {
             <Badge className="text-base px-3 py-1" variant="default">
               {entry.score}
             </Badge>
-            <Button
-              variant="ghost"
-              size="sm"
-              className="opacity-0 group-hover:opacity-100 transition-opacity h-6 text-xs text-muted-foreground hover:text-destructive"
-              onClick={() => onDelete(entry.id)}
-            >
-              Delete
-            </Button>
           </div>
         </div>
       </CardContent>
