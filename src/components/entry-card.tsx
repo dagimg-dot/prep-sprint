@@ -166,6 +166,9 @@ export function EntryCard({ entry, onDelete }: EntryCardProps) {
   );
   const [editTestLink, setEditTestLink] = useState(entry.testLink ?? "");
   const [editNotes, setEditNotes] = useState(entry.notes);
+  const [editPartScores, setEditPartScores] = useState(
+    entry.partScores?.map((ps) => ({ ...ps })) ?? [],
+  );
 
   const startEditing = () => {
     setEditName(entry.testName);
@@ -173,6 +176,7 @@ export function EntryCard({ entry, onDelete }: EntryCardProps) {
     setEditRawScore(entry.rawScore != null ? String(entry.rawScore) : "");
     setEditTestLink(entry.testLink ?? "");
     setEditNotes(entry.notes);
+    setEditPartScores(entry.partScores?.map((ps) => ({ ...ps })) ?? []);
     setEditing(true);
   };
 
@@ -182,6 +186,7 @@ export function EntryCard({ entry, onDelete }: EntryCardProps) {
       testName: editName.trim() || entry.testName,
       score: parseFloat(editScore) || entry.score,
       rawScore: editRawScore ? parseInt(editRawScore, 10) : undefined,
+      partScores: editPartScores.filter((ps) => !Number.isNaN(ps.score)),
       testLink: editTestLink.trim() || undefined,
       notes: editNotes.trim(),
     });
@@ -253,19 +258,53 @@ export function EntryCard({ entry, onDelete }: EntryCardProps) {
               )}
             </div>
             <div className="flex items-center gap-2 flex-wrap">
-              {entry.partScores && entry.partScores.length > 0 && (
-                <span className="flex gap-1">
-                  {entry.partScores.map((ps) => (
-                    <Badge
-                      key={ps.label}
-                      variant="outline"
-                      className="text-[10px] font-normal"
-                    >
-                      {ps.label}: {ps.score}/{ps.max}
-                    </Badge>
-                  ))}
-                </span>
-              )}
+              {editing
+                ? editPartScores.length > 0 && (
+                    <span className="flex gap-1 flex-wrap">
+                      {editPartScores.map((ps, i) => (
+                        <span
+                          key={ps.label}
+                          className="flex items-center gap-0.5"
+                        >
+                          <span className="text-[10px] text-muted-foreground">
+                            {ps.label}:
+                          </span>
+                          <Input
+                            type="number"
+                            min="0"
+                            max={ps.max}
+                            value={ps.score || ""}
+                            onChange={(e) => {
+                              const next = [...editPartScores];
+                              next[i] = {
+                                ...next[i],
+                                score: parseInt(e.target.value, 10) || 0,
+                              };
+                              setEditPartScores(next);
+                            }}
+                            className="h-6 text-[10px] w-10 [appearance:textfield] [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none"
+                          />
+                          <span className="text-[10px] text-muted-foreground">
+                            /{ps.max}
+                          </span>
+                        </span>
+                      ))}
+                    </span>
+                  )
+                : entry.partScores &&
+                  entry.partScores.length > 0 && (
+                    <span className="flex gap-1">
+                      {entry.partScores.map((ps) => (
+                        <Badge
+                          key={ps.label}
+                          variant="outline"
+                          className="text-[10px] font-normal"
+                        >
+                          {ps.label}: {ps.score}/{ps.max}
+                        </Badge>
+                      ))}
+                    </span>
+                  )}
               {editing ? (
                 <Input
                   placeholder="Raw"
