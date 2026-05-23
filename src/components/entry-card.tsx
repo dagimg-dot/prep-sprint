@@ -215,6 +215,7 @@ export function EntryCard({ entry, onDelete }: EntryCardProps) {
       ),
     };
     if (entry.notes) payload.notes = entry.notes;
+    if (entry.timeSpent) payload.timeSpent = entry.timeSpent;
     navigator.clipboard.writeText(JSON.stringify(payload, null, 2)).then(() => {
       setCopied(true);
       setTimeout(() => setCopied(false), 2000);
@@ -314,6 +315,18 @@ export function EntryCard({ entry, onDelete }: EntryCardProps) {
                       ))}
                     </span>
                   )}
+              {entry.timeSpent && entry.timeSpent.length > 0 && (
+                <div className="flex flex-wrap gap-1 mt-1">
+                  {entry.timeSpent.map((t) => (
+                    <span
+                      key={t.label}
+                      className="text-[10px] px-1.5 py-0.5 rounded bg-muted"
+                    >
+                      {t.label}: {t.minutes}m
+                    </span>
+                  ))}
+                </div>
+              )}
               {editing ? (
                 <Input
                   placeholder="Raw"

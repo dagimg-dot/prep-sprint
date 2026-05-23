@@ -111,6 +111,11 @@ export interface PartScore {
   max: number;
 }
 
+export interface TimeSpent {
+  label: string;
+  minutes: number;
+}
+
 export interface TestEntry {
   id: string;
   testName: string;
@@ -121,6 +126,7 @@ export interface TestEntry {
   rawScore?: number;
   rawMax?: number;
   partScores?: PartScore[];
+  timeSpent?: TimeSpent[];
 
   notes: string;
   testLink?: string;

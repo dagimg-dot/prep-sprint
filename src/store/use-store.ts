@@ -68,6 +68,7 @@ export const useStore = create<AppState>()(
           entries: (p?.entries ?? []).map((e: TestEntry) => ({
             ...e,
             errorLog: e.errorLog ?? [],
+            timeSpent: e.timeSpent ?? undefined,
           })),
         };
       },

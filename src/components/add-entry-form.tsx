@@ -38,6 +38,9 @@ export function AddEntryForm() {
   const [partScores, setPartScores] = useState<
     { label: string; score: string; max: string }[]
   >([]);
+  const [timeSpentInputs, setTimeSpentInputs] = useState<
+    { label: string; minutes: string }[]
+  >([]);
 
   const [errorLogOpen, setErrorLogOpen] = useState(false);
   const [pendingErrors, setPendingErrors] = useState<ErrorLogEntry[]>([]);
@@ -61,7 +64,34 @@ export function AddEntryForm() {
         { label: "Section 4", score: "", max: "10" },
       ]);
     } else {
-      setPartScores([]);
+    setPartScores([]);
+    setTimeSpentInputs([]);
+    }
+
+    if (testType === "reading") {
+      setTimeSpentInputs([
+        { label: "Passage 1", minutes: "" },
+        { label: "Passage 2", minutes: "" },
+        { label: "Passage 3", minutes: "" },
+      ]);
+    } else if (testType === "listening") {
+      setTimeSpentInputs([
+        { label: "Section 1", minutes: "" },
+        { label: "Section 2", minutes: "" },
+        { label: "Section 3", minutes: "" },
+        { label: "Section 4", minutes: "" },
+      ]);
+    } else if (testType === "writing") {
+      setTimeSpentInputs([
+        { label: "Task 1", minutes: "" },
+        { label: "Task 2", minutes: "" },
+      ]);
+    } else if (testType === "speaking") {
+      setTimeSpentInputs([
+        { label: "Part 1", minutes: "" },
+        { label: "Part 2", minutes: "" },
+        { label: "Part 3", minutes: "" },
+      ]);
     }
   }, [testType]);
 
@@ -112,6 +142,16 @@ export function AddEntryForm() {
         mistake,
         fix,
       })),
+      timeSpent:
+        timeSpentInputs.filter((t) => t.minutes.trim() !== "").length > 0
+          ? timeSpentInputs
+              .filter((t) => t.minutes.trim() !== "")
+              .map((t) => ({
+                label: t.label,
+                minutes: parseInt(t.minutes, 10),
+              }))
+              .filter((t) => !Number.isNaN(t.minutes))
+          : undefined,
     };
     if (notes.trim()) payload.notes = notes.trim();
     navigator.clipboard.writeText(JSON.stringify(payload, null, 2)).then(() => {
@@ -148,6 +188,16 @@ export function AddEntryForm() {
       writingTask2: undefined,
       audioFileName: undefined,
       errorLog: pendingErrors,
+      timeSpent:
+        timeSpentInputs.filter((t) => t.minutes.trim() !== "").length > 0
+          ? timeSpentInputs
+              .filter((t) => t.minutes.trim() !== "")
+              .map((t) => ({
+                label: t.label,
+                minutes: parseInt(t.minutes, 10),
+              }))
+              .filter((t) => !Number.isNaN(t.minutes))
+          : undefined,
     };
 
     if (testType === "listening" || testType === "reading") {
@@ -170,6 +220,7 @@ export function AddEntryForm() {
     setScore("");
     setRawScore("");
     setPartScores([]);
+    setTimeSpentInputs([]);
     setTestLink("");
     setWritingTask1("");
     setWritingTask2("");
@@ -245,6 +296,8 @@ export function AddEntryForm() {
           onRawScoreChange={setRawScore}
           partScores={partScores}
           onPartScoresChange={setPartScores}
+          timeSpentInputs={timeSpentInputs}
+          onTimeSpentInputsChange={setTimeSpentInputs}
         />
 
         <Textarea

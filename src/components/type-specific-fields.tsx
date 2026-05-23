@@ -9,6 +9,11 @@ interface PartScoreInput {
   max: string;
 }
 
+interface TimeSpentInput {
+  label: string;
+  minutes: string;
+}
+
 interface TypeSpecificFieldsProps {
   testType: TestType;
   testLink: string;
@@ -23,6 +28,8 @@ interface TypeSpecificFieldsProps {
   onRawScoreChange?: (v: string) => void;
   partScores?: PartScoreInput[];
   onPartScoresChange?: (scores: PartScoreInput[]) => void;
+  timeSpentInputs: TimeSpentInput[];
+  onTimeSpentInputsChange: (time: TimeSpentInput[]) => void;
 }
 
 export function TypeSpecificFields(props: TypeSpecificFieldsProps) {
@@ -44,6 +51,8 @@ function LinkFields({
   onRawScoreChange,
   partScores,
   onPartScoresChange,
+  timeSpentInputs,
+  onTimeSpentInputsChange,
 }: TypeSpecificFieldsProps) {
   return (
     <div className="space-y-3">
@@ -88,6 +97,18 @@ function LinkFields({
                 <span className="text-xs text-muted-foreground pb-1.5 shrink-0">
                   / {part.max}
                 </span>
+                <Input
+                  type="number"
+                  min="0"
+                  placeholder="min"
+                  className="h-7 text-xs w-16"
+                  value={timeSpentInputs[i]?.minutes ?? ""}
+                  onChange={(e) => {
+                    const next = [...timeSpentInputs];
+                    next[i] = { ...next[i], minutes: e.target.value };
+                    onTimeSpentInputsChange(next);
+                  }}
+                />
               </div>
             ))}
           </div>
@@ -111,6 +132,8 @@ function WritingFields({
   onWritingTask1Change,
   onWritingTask2Change,
   onTestLinkChange,
+  timeSpentInputs,
+  onTimeSpentInputsChange,
 }: TypeSpecificFieldsProps) {
   return (
     <div className="space-y-3">
@@ -137,6 +160,27 @@ function WritingFields({
           rows={8}
         />
       </div>
+      <div className="space-y-1.5">
+        <p className="text-xs text-muted-foreground">Time spent</p>
+        {timeSpentInputs.map((t, i) => (
+          <div key={t.label} className="flex items-center gap-2">
+            <span className="text-xs text-muted-foreground w-12">{t.label}</span>
+            <Input
+              type="number"
+              min="0"
+              placeholder="min"
+              className="h-7 text-xs w-16"
+              value={t.minutes}
+              onChange={(e) => {
+                const next = [...timeSpentInputs];
+                next[i] = { ...next[i], minutes: e.target.value };
+                onTimeSpentInputsChange(next);
+              }}
+            />
+            <span className="text-xs text-muted-foreground">min</span>
+          </div>
+        ))}
+      </div>
       <Input
         placeholder="Link to prompt (optional)"
         type="url"
@@ -152,6 +196,8 @@ function SpeakingFields({
   testLink,
   onAudioFileChange,
   onTestLinkChange,
+  timeSpentInputs,
+  onTimeSpentInputsChange,
 }: TypeSpecificFieldsProps) {
   const handleClick = () => {
     const fakeName = `speaking-recording-${Date.now()}.webm`;
@@ -179,6 +225,27 @@ function SpeakingFields({
         {audioFileName && (
           <p className="text-xs text-emerald-400">Uploaded: {audioFileName}</p>
         )}
+      </div>
+      <div className="space-y-1.5">
+        <p className="text-xs text-muted-foreground">Time spent</p>
+        {timeSpentInputs.map((t, i) => (
+          <div key={t.label} className="flex items-center gap-2">
+            <span className="text-xs text-muted-foreground w-12">{t.label}</span>
+            <Input
+              type="number"
+              min="0"
+              placeholder="min"
+              className="h-7 text-xs w-16"
+              value={t.minutes}
+              onChange={(e) => {
+                const next = [...timeSpentInputs];
+                next[i] = { ...next[i], minutes: e.target.value };
+                onTimeSpentInputsChange(next);
+              }}
+            />
+            <span className="text-xs text-muted-foreground">min</span>
+          </div>
+        ))}
       </div>
       <Input
         placeholder="Test link (URL)"
